@@ -1,0 +1,227 @@
+.notification-btn {
+  position: relative; /* popup이 이 버튼을 기준으로 위치함 */
+}
+
+.noti-badge {
+  position: absolute;
+  top: 1px; /* 버튼 내부 위치로 조정 */
+  right: 2px;
+
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 50%;
+  min-width: 16px;
+  text-align: center;
+  line-height: 1;
+}
+
+.notification-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent; /* 투명 배경 */
+  z-index: 500; /* 팝업보다 뒤에, 다른 요소보다 앞에 */
+}
+
+.notification-popup {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  width: 350px;
+  height: 450px;
+  padding-top: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transform: translateX(-85%); /* 알림함 위치 고정 */
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px 8px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.popup-header .popup-close-btn {
+  all: unset; /* 기본 버튼 스타일 완전 제거 */
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.popup-header .popup-close-btn:hover {
+  color: #777;
+}
+
+.popup-content {
+  flex: 1;
+  padding: 0 5px;
+  color: #444;
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+.popup-content::-webkit-scrollbar {
+  width: 3px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-item {
+  display: flex;
+  position: relative;
+  gap: 10px;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item:hover {
+  background: #f8f9fa;
+}
+
+.notification-item.open {
+  background-color: #f7f9fc;
+}
+
+.notification-item.open::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #4b96ff;
+  border-radius: 2px;
+}
+
+.notif-details {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+
+  /* 자연스러운 애니메이션 */
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notif-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.notif-dot.unread {
+  background-color: #4b96ff;
+}
+
+.notif-dot.read {
+  background-color: #d9d9d9;
+}
+
+.notif-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.notif-message {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 300px;
+  min-width: 0;
+}
+
+.notif-message.unread {
+  font-weight: 600;
+  color: #333;
+}
+
+.notif-message.read {
+  font-weight: 500;
+  color: #555;
+}
+
+.notif-message.expanded {
+  white-space: normal; /* 여러 줄 허용 */
+  overflow: visible; /* 넘쳐도 숨기지 않음 */
+  text-overflow: unset; /* ... 제거 */
+}
+
+.notif-date {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #999;
+}
+
+.popup-footer {
+  border-top: 1px solid #eee;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link-to-list {
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+}
+
+.link-to-list:hover {
+  text-decoration: underline;
+}
+
+.notification-empty {
+  padding: 40px 0;
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px; /* 팝업 높이에 맞게 */
+}

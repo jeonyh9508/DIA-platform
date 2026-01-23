@@ -1,0 +1,193 @@
+.settle-approval-page {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+
+  padding: 0 20px;
+  font-family: "Pretendard", sans-serif;
+  color: #222;
+}
+.settle-approval-container {
+  max-width: 1500px;
+  min-width: 1500px;
+}
+.settle-approval-container h2 {
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 12px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #111;
+  margin-top: 50px;
+}
+.settle-page-title {
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #111;
+  border-bottom: 1px solid #eee;
+}
+
+.settle-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.settle-tabs button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #777;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+
+.settle-tabs button.active {
+  color: #111;
+  border-bottom: 2px solid #111;
+  font-weight: bold;
+}
+
+.settle-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.settle-table .settle-table-header th {
+  background-color: #666;
+  color: white;
+}
+.settle-table th,
+.settle-table td {
+  text-align: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  word-break: keep-all;
+}
+
+.settle-table th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.settle-table th:nth-child(1),
+.settle-table td:nth-child(1) {
+  width: 15%;
+}
+.settle-table th:nth-child(2),
+.settle-table td:nth-child(2) {
+  width: 10%;
+} /* 공방주 */
+.settle-table th:nth-child(3),
+.settle-table td:nth-child(3) {
+  width: 12%;
+} /* 정산 대상 금액 */
+.settle-table th:nth-child(4),
+.settle-table td:nth-child(4) {
+  width: 10%;
+} /* 조정 금액 */
+.settle-table th:nth-child(5),
+.settle-table td:nth-child(5) {
+  width: 12%;
+} /* 최종 정산 금액 */
+.settle-table th:nth-child(6),
+.settle-table td:nth-child(6) {
+  width: 12%;
+} /* 계산서 발행일 */
+.settle-table th:nth-child(7),
+.settle-table td:nth-child(7) {
+  width: 10%;
+} /* 상태 */
+.settle-table th:nth-child(8),
+.settle-table td:nth-child(8) {
+  width: 8%;
+} /* 처리 버튼 */
+.settle-table th:nth-child(9),
+.settle-table td:nth-child(9) {
+  width: 11%;
+}
+
+.settle-table-row:hover {
+  background-color: #fafafa;
+}
+
+/* 상태 배지 공통 */
+.settle-status-badge {
+  display: inline-block;
+  text-align: center;
+  min-width: 60px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 auto;
+}
+
+/* 상태별 색상 */
+.settle-status-정산중 {
+  background-color: #f0ad4e;
+} /* 주황 */
+.settle-status-환불 {
+  background-color: #d9534f;
+} /* 빨강 */
+.settle-status-조정 {
+  background-color: #5bc0de;
+} /* 하늘 */
+.settle-status-정산완료 {
+  background-color: #5cb85c;
+} /* 초록 */
+.settle-status-unsettled {
+  background-color: #888;
+} /* 회색 미정산 */
+
+/* 처리 버튼 */
+.settle-manage-btn {
+  width: 70px;
+  padding: 5px 10px;
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.settle-manage-btn:hover {
+  background-color: #333;
+}
+
+/* 비어있을 때 메시지 */
+.settle-empty-message {
+  text-align: center;
+  padding: 20px 0;
+  color: #888;
+}
+
+.status-radio {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.status-radio label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.status-radio input[type="radio"] {
+  margin-right: 5px;
+  accent-color: #111;
+}
+.settle-summary {
+  margin-bottom: 20px;
+  text-align: right;
+}

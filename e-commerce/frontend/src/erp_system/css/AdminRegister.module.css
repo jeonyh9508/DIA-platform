@@ -1,0 +1,235 @@
+.wrapper {
+  background-color: #f5f6fa;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  background-color: white;
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  font-family: "Pretendard", sans-serif;
+  flex: 1;
+}
+
+.headerActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.toggleBtn {
+  padding: 10px 24px;
+  background-color: #2c3e50;
+  color: white;
+  border: 1px solid #2c3e50;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggleBtn:hover {
+  background-color: #1a252f;
+  border-color: #1a252f;
+}
+
+.toggleBtn.cancel {
+  background-color: white;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.toggleBtn.cancel:hover {
+  background-color: #fff5f5;
+}
+
+.erp-table {
+  width: 100%;
+  border-top: 1px solid #ddd;
+}
+
+.erp-table-header,
+.erp-table-row {
+  display: grid;
+  align-items: center;
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+.erp-table-row {
+  display: grid;
+  align-items: center;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  height: 60px;
+  padding: 0 4px;
+}
+.management-table .erp-table-row > div:nth-child(1),
+.management-table .erp-table-row > div:nth-child(2),
+.management-table .erp-table-header > div:nth-child(1),
+.management-table .erp-table-header > div:nth-child(2) {
+  text-align: left;
+  padding-left: 6px;
+}
+
+.erp-table-header {
+  font-weight: 600;
+  background: #f8f8f8;
+  color: #666;
+  font-size: 16px;
+}
+
+.erp-table-row:hover {
+  background-color: #fafafa;
+}
+
+.management-table .erp-table-header,
+.management-table .erp-table-row {
+  grid-template-columns: 15fr 25fr 20fr 15fr 25fr;
+  gap: 10px;
+}
+
+.erp-table-row.newRow {
+  background-color: #e8f4fd;
+}
+
+.input, .select {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+  width: 100%; 
+  margin: 0;
+  padding: 8px 5px;
+}
+
+.input:focus, .select:focus {
+  border-color: #4a90e2;
+}
+
+.actionBtn {
+  padding: 6px 14px;
+  margin-right: 8px;
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #555;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.actionBtn:last-child {
+  margin-right: 0;
+}
+
+.actionBtn:hover {
+  background-color: #f9f9f9;
+  border-color: #bbb;
+}
+
+.saveBtn { 
+  background-color: #2c3e50; 
+  border-color: #2c3e50;
+  color: white; 
+}
+
+.saveBtn:hover {
+  background-color: #1a252f;
+  opacity: 1;
+}
+
+.editBtn { 
+  border-color: #b0b0b0;
+  color: #333;
+}
+
+.editBtn:hover {
+  background-color: #f0f0f0;
+  border-color: #333;
+}
+
+.delBtn { 
+  border-color: #ffcccc;
+  color: #e74c3c;
+}
+
+.delBtn:hover {
+  background-color: #fff5f5;
+  border-color: #e74c3c;
+}
+
+.cancelBtn { 
+  border-color: #ddd;
+  color: #888; 
+}
+
+.cancelBtn:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.pageBtn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.pageBtn:hover {
+  background-color: #f0f0f0;
+  color: #333;
+  border-color: #ccc;
+}
+
+.active {
+  background-color: #4a4a4a;
+  border-color: #4a4a4a;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pageBtn.active:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.pageBtn:disabled {
+  background-color: #fff;
+  color: #ccc;
+  border-color: #eee;
+  cursor: not-allowed;
+}

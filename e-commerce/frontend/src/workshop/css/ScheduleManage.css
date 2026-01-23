@@ -1,0 +1,290 @@
+.ws-schedule-manage-container h3,
+.ws-schedule-manage-container h4 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.ws-select-date {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.ws-select-date input[type="date"] {
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.ws-select-date input[type="date"]:focus {
+  border-color: #333;
+  background-color: #fff;
+}
+
+.ws-select-date button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #6c757d;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.ws-select-date button:hover {
+  background-color: #5a6268;
+}
+
+.ws-schedule-display-area {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.ws-schedule-box {
+  flex: 1;
+  height: 300px;
+  overflow-y: auto;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  background-color: #fcfcfc;
+}
+.ws-schedule-box p {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #333;
+}
+.ws-schedule-list {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  color: #555;
+}
+
+.ws-schedule-list:last-child {
+  border-bottom: none;
+}
+
+.ws-schedule-list:hover {
+  background-color: #f5f5f5;
+}
+
+.ws-schedule-list.active {
+  background-color: #333;
+  color: #fff;
+  font-weight: 600;
+}
+
+.ws-schedule-capacity {
+  float: right;
+  color: #888;
+  font-size: 14px;
+}
+
+.ws-schedule-list.active .ws-schedule-capacity {
+  color: #ccc;
+}
+
+.ws-selected-schedule-detail-box {
+  flex: 0 0 350px;
+  border: 2px solid #f0f0f0;
+  background-color: #fff;
+  padding: 0 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  height: 300px;
+}
+
+.ws-selected-schedule-detail-box.empty-detail {
+  border-style: dashed;
+  border-color: #ccc;
+  background-color: #f9f9f9;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-style: italic;
+}
+
+.ws-selected-schedule-detail-box.active-detail {
+  margin: 0;
+  border-color: #333;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ws-selected-schedule-detail-box.active-detail h4 {
+  margin-bottom: 15px;
+}
+
+.ws-schedule-form-container {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+/* --- ScheduleEdit Styles --- */
+
+.ws-schedule-edit-attendees {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  font-weight: 600;
+}
+
+.ws-schedule-form-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.ws-schedule-form-inputs label {
+  font-weight: 600;
+  color: #333;
+  margin-right: -5px;
+}
+
+.ws-schedule-form-inputs input[type="date"],
+.ws-schedule-form-inputs input[type="time"],
+.ws-schedule-form-inputs input[type="number"] {
+  padding: 10px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  flex: 1;
+  min-width: 130px;
+}
+
+.ws-schedule-form-inputs input[type="number"] {
+  flex: 0 1 60px;
+  min-width: 60px;
+  text-align: right;
+  padding: 10px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 60px;
+}
+
+.ws-schedule-form-inputs input[type="date"]:focus,
+.ws-schedule-form-inputs input[type="time"]:focus,
+.ws-schedule-form-inputs input[type="number"]:focus {
+  border-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ws-schedule-form-inputs .ws-disabled-input {
+  background-color: #eee;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.ws-selected-date-text {
+  font-weight: 600;
+  color: #333;
+  padding: 10px 12px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.ws-schedule-form-inputs .ws-btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ws-schedule-form-inputs button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.ws-schedule-form-inputs button[type="submit"] {
+  background-color: #555;
+  color: white;
+  border: 2px solid #555;
+  margin-left: auto;
+}
+
+.ws-schedule-form-inputs .ws-btn-group button[type="submit"] {
+  margin-left: 0;
+}
+
+.ws-schedule-form-inputs button[type="submit"]:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.ws-schedule-form-inputs .ws-delete-button {
+  background-color: #fff;
+  color: #c9302c;
+  border: 2px solid #c9302c;
+}
+
+.ws-schedule-form-inputs .ws-delete-button:hover {
+  background-color: #c9302c;
+  color: #fff;
+}
+
+.ws-schedule-form-inputs .ws-close-button {
+  background-color: #6c757d;
+  color: white;
+  border: 2px solid #6c757d;
+}
+
+.ws-schedule-form-inputs .ws-close-button:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+}
+
+.ws-schedule-form-inputs button:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.ws-capacity-group {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 40px;
+}
+.ws-date-group {
+  display: flex;
+  gap: 10px;
+}

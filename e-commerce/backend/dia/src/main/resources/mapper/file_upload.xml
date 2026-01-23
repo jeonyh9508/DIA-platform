@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ProgramImageDAO">
+    <select id="getImgNo" parameterType="int" resultType="int">
+        SELECT COALESCE(MAX(img_no), 0)
+        FROM program_image
+        WHERE program_id = #{programId}
+    </select>
+
+    <insert id="insertImg" parameterType="List">
+        INSERT INTO program_image (
+        program_id,
+        folder,
+        image,
+        img_no
+        ) VALUES
+        <foreach item="item" collection="list" separator=",">
+            (
+            #{item.programId},
+            #{item.folder},
+            #{item.image},
+            #{item.imgNo}
+            )
+        </foreach>
+    </insert>
+</mapper>

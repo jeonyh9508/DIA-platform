@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.NotificationUserDAO">
+
+    <select id="selectMyN" parameterType="int" resultType="NotificationUserDTO">
+        SELECT
+        nu.notification_user_id AS id,
+        nu.user_id,
+        nu.viewed,
+        n.sender_id,
+        n.message,
+        n.created_at,
+
+        u.name,
+        w.workshop_id AS workshopId,
+        w.name AS workshopName
+        FROM notification_user nu
+        LEFT JOIN notification n
+        ON nu.notification_id = n.notification_id
+        LEFT JOIN user u
+        ON n.sender_id = u.user_id
+        LEFT JOIN workshop w
+        ON n.workshop_id = w.workshop_id
+        WHERE nu.user_id = #{userId}
+        <if test="filter == 'unread'">
+            AND nu.viewed = FALSE
+        </if>
+        <if test="filter == 'read'">
+            AND nu.viewed = TRUE
+        </if>
+
+        ORDER BY n.created_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="selectMyNCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM notification_user nu
+        LEFT JOIN notification n ON nu.notification_id = n.notification_id
+        WHERE nu.user_id = #{userId}
+        <if test="filter == 'unread'">
+            AND nu.viewed = FALSE
+        </if>
+        <if test="filter == 'read'">
+            AND nu.viewed = TRUE
+        </if>
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="NotificationUserDTO">
+        SELECT
+        nu.notification_user_id AS id,
+        nu.user_id,
+        nu.viewed,
+        n.sender_id,
+        n.message,
+        n.created_at,
+        n.type,
+        u.name,
+        w.workshop_id AS workshopId,
+        w.name AS workshopName
+        FROM notification_user nu
+        LEFT JOIN notification n
+        ON nu.notification_id = n.notification_id
+        LEFT JOIN user u
+        ON n.sender_id = u.user_id
+        LEFT JOIN workshop w
+        ON n.workshop_id = w.workshop_id
+        WHERE nu.notification_user_id = #{id}
+    </select>
+
+    <select id="selectNotis" parameterType="int" resultType="NotificationUserDTO">
+        SELECT
+            nu.notification_user_id AS id,
+            nu.user_id,
+            nu.viewed,
+            n.message,
+            n.created_at
+        FROM notification_user nu
+        JOIN user u
+            ON nu.user_id = u.user_id
+        LEFT JOIN notification n
+            ON nu.notification_id = n.notification_id
+        WHERE
+            nu.user_id = #{userId} AND u.role = 'CUSTOMER'
+        ORDER BY n.created_at DESC
+    </select>
+
+    <update id="updateViewedOne" parameterType="int">
+        UPDATE notification_user SET viewed = TRUE WHERE notification_user_id = #{id}
+    </update>
+
+    <update id="updateViewedList" parameterType="list">
+        UPDATE notification_user
+        SET viewed = TRUE
+        WHERE notification_user_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <delete id="deleteNotifications" parameterType="list">
+        DELETE FROM notification_user
+        WHERE notification_user_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

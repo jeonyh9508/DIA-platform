@@ -1,0 +1,225 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+.regiCard {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.regiHeader {
+    padding: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.regiTitle {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: "Rebecca";
+}
+
+.formRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.input {
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  padding-left: 10px;
+  font-size: 1em;
+  background-color: #f8f8f8;
+}
+.input:focus {
+    outline: none; 
+    box-shadow: none; 
+    background-color: #f8f8f8;
+}
+.input:active {
+  background-color: #f8f8f8;
+}
+
+.inputWrap {
+  position: relative;
+  width: 250px;
+}
+.btnInput {
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 8px 35px 8px 10px;
+  border: 1px solid #bbb;
+  font-size: 1em;
+  background-color: #f8f8f8;
+}
+.btnInput:focus {
+    outline: none; 
+    box-shadow: none; 
+    background-color: #f8f8f8;
+}
+.btnInput:active {
+  background-color: #f8f8f8;
+}
+.btnInInput {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btnInInput:hover {
+    color: #808080;
+}
+.btnInInput:active {
+    color: #505050;
+}
+
+.emailMsg {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+.codeMsg {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+.nameMsg {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+.phoneMsg {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+.pwdMsg {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+.pwdCheckMsg {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+
+.guideMent {
+  font-size: 0.8rem;
+  color: #555555;
+}
+
+.isRed {
+  color: #FF6B6B;
+}
+.isGreen {
+  color: #3CB371;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    margin-top: 12px;
+    margin-bottom: 27px;
+}
+
+.cancelBtn {
+    width: 300px;
+    height: 45px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    background-color: #fafafa;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease; 
+}
+.cancelBtn:hover {
+    background-color: #f0f0f0;
+}
+.cancelBtn:active {
+    background-color: #e0e0e0;
+}
+
+.regiBtn {
+    width: 300px;
+    height: 45px;
+    border: 1px solid #616161;
+    border-radius: 6px;
+    background-color: #757575;
+    color: #fafafa;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.regiBtn:hover {
+    background-color: #616161;
+}
+.regiBtn:active {
+    background-color: #505050;
+}
+
+.radioGroup {
+  display: flex;
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.radioInput {
+  display: none;
+}
+
+.radioLabel {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  color: #757575;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:first-of-type {
+    border-right: 1px solid #ddd;
+  }
+}
+
+.radioLabel:hover {
+  background-color: #f0f0f0;
+}
+
+.radioInput:checked + .radioLabel {
+  background-color: #555555;
+  color: white;
+  border-color: #555555;
+}
+
+.radioInput:checked + .radioLabel:hover {
+  background-color: #444444;
+}
+
+.loginMsg {
+  display: flex;
+  gap: 5px;
+  justify-content: right;
+  margin-bottom: 5px;
+}
+
+.loginPage {
+  text-decoration: underline;
+}

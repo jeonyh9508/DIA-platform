@@ -1,0 +1,158 @@
+/* 전체 컨테이너 */
+.erp-settlement-container {
+  width: 100%;
+  padding: 24px;
+  /* background-color: #f4f6f8; */
+  box-sizing: border-box;
+  color: #1f2937;
+  min-height: 100vh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+}
+
+/* 그리드 레이아웃 */
+.erp-settlement-grid {
+  display: grid;
+  max-width: 1500px;
+  min-width: 1500px;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(350px, auto) minmax(350px, auto);
+  gap: 20px;
+}
+
+/* 카드 박스 */
+.erp-settlement-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* 카드 제목 */
+.erp-settlement-card h3 {
+  margin: 0 0 14px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+
+/* 차트 영역 */
+.erp-settlement-chart-wrapper {
+  flex: 1;
+  width: 100%;
+  min-height: 250px;
+  background-color: #ffffff;
+}
+
+/* 요약 박스 */
+.erp-settlement-summary-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.erp-settlement-approval-type {
+  background-color: #eef6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.erp-settlement-refund-type {
+  background-color: #fff2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+/* 텍스트 */
+.erp-settlement-label {
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.erp-settlement-value {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Roboto Mono", monospace;
+  letter-spacing: -0.5px;
+}
+
+/* 리스트 wrapper */
+.erp-settlement-list-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  max-height: 300px;
+}
+
+/* 스크롤바 스타일 */
+.erp-settlement-list-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+.erp-settlement-list-wrapper::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+.erp-settlement-list-wrapper::-webkit-scrollbar-track {
+  background-color: #f1f5f9;
+}
+
+/* 테이블 */
+.erp-settlement-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  letter-spacing: -0.2px;
+}
+
+.erp-settlement-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f9fafb;
+  color: #374151;
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #d1d5db;
+  z-index: 2;
+}
+
+.erp-settlement-table thead th:last-child {
+  text-align: right;
+}
+
+.erp-settlement-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+}
+
+.erp-settlement-table tbody td:last-child {
+  text-align: right;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+}
+
+.erp-settlement-table tbody tr:hover {
+  background-color: #f3f4f6;
+}
+
+/* 빨간 텍스트 */
+.erp-settlement-text-red {
+  color: #dc2626;
+  font-weight: 600;
+}

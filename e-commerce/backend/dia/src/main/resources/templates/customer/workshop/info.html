@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <h3>공방 명 : <span th:text="${dto.name}"/></h3>
+        <div>설명 : <span th:text="${dto.description}"/></div>
+        <div>위치 : <span th:text="${dto.address}"/></div>
+        <div>연락처 : <span th:text="${dto.contact_number}"/></div>
+        <div>영업 여부 : <span th:text="${dto.status}"/></div>
+        <div>존재 여부 : <span th:text="${dto.active}"/></div>
+    </div>
+    <hr/>
+    <hr/>
+    <div>
+        <h3>프로그램 목록</h3>
+        <div th:each="p : ${dto.program}">
+            <p th:text="${p.title}">프로그램 명</p>
+            <p>카테고리: <span th:text="${p.category}"></span></p>
+            <p>가격: <span th:text="${p.price}"></span></p>
+            <p>정원: <span th:text="${p.capacity}"></span></p>
+            <p>난이도: <span th:text="${p.difficulty}"></span></p>
+            <hr />
+        </div>
+    </div>
+</div>
+</body>
+</html>

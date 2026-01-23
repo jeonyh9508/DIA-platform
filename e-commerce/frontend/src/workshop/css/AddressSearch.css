@@ -1,0 +1,60 @@
+/* AddressSearch.css */
+
+.ws-address-search-modal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.ws-address-search-modal h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ws-search-input-group {
+  display: flex;
+  gap: 15px; /* 항목 간 간격 확장 */
+  align-items: center;
+  margin: 15px 0 25px 0;
+  width: 100%;
+}
+
+.ws-search-input-group input[type="text"] {
+  /* 너비 300px 고정 유지 */
+  flex: 0 0 500px;
+  width: 300px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd; /* 더 얇고 깔끔한 테두리 */
+  border-radius: 8px;
+  background-color: #fff; /* 밝은 배경 */
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* 은은한 안쪽 그림자 */
+}
+
+.ws-search-input-group input[type="text"]:focus {
+  border-color: #333; /* 포커스 시 진한 테두리 */
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(85, 85, 85, 0.1); /* 포커스 시 소프트 링 효과 */
+}
+
+.ws-search-input-group button {
+  padding: 8px 16px; /* 버튼 패딩 증가 */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #555;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.ws-search-input-group button:hover {
+  background-color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,114 @@
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.continue-pay-btn {
+  background-color: #f39c12;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.continue-pay-btn:hover {
+  background-color: #e67e22;
+  transform: translateY(-1px);
+}
+
+.reservation-status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.reservation-header .reservation-status {
+  margin-left: 15px;
+}
+
+.reservation-status.대기 {
+  background-color: #fff4e6;
+  color: #e67e22;
+}
+
+.reservation-status.확정 {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.reservation-status.취소 {
+  background-color: #fdecea;
+  color: #d93025;
+}
+
+.reservation-status.수강종료 {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-section .info-box {
+  width: 450px;
+}
+
+.value.refunded {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.btn-set {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+  margin-right: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-set button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancle-btn {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.cancle-btn:hover:not(:disabled) {
+  background-color: #000;
+}
+
+.cancle-btn:disabled {
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  color: #fff;
+  cursor: default;
+}
+
+.back-btn {
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.back-btn:hover {
+  background-color: #f4f4f4;
+}

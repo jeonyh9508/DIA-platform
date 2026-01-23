@@ -1,0 +1,40 @@
+.ws-pf-view-box {
+  font-weight: 400;
+  font-size: 14px;
+  color: #333;
+  padding-top: 10px;
+  in-height: 20px;
+}
+
+.ws-pf-view-item {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ws-pf-view-item:last-child {
+  margin-bottom: 0;
+}
+.ws-profit-owner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.ws-pf-view-item .commission {
+  font-size: 13px;
+  color: #555;
+  margin-left: 4px;
+}
+
+.ws-pf-view-box.empty {
+  color: #888;
+  font-style: italic;
+}
+
+.ws-pf-view-box.loading {
+  color: #aaa;
+}
+
+.ws-pf-view-box.error {
+  color: #d9534f;
+  font-weight: 500;
+}

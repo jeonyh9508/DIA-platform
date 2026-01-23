@@ -1,0 +1,60 @@
+/* Review.css */
+
+.ws-review-container {
+  width: 100%;
+}
+
+.ws-review-title {
+  /* WsInfo.css의 .side-card h3 스타일을 상속받으므로 margin과 padding만 미세 조정 */
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.ws-review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.ws-review-item {
+  padding: 15px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.ws-review-item:last-child {
+  border-bottom: none;
+}
+
+.ws-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ws-reviewer-name strong {
+  color: #333;
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.ws-review-rating {
+  color: #888;
+  font-weight: 600;
+}
+
+.ws-review-content {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.ws-review-empty {
+  text-align: center;
+  padding: 30px 10px;
+  color: #999;
+}

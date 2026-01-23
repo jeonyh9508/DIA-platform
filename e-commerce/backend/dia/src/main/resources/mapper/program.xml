@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ProgramDAO">
+
+    <select id="selectAll" resultType="ProgramDTO">
+        SELECT
+        p.program_id,
+        p.category,
+        p.thumb,
+        p.title,
+        p.price,
+        p.active,
+        p.approved,
+
+        w.name,
+        w.address,
+        w.profile_img,
+
+        (SELECT AVG(rating) FROM review WHERE program_id = p.program_id) AS avgRating,
+        (SELECT COUNT(review_id) FROM review WHERE program_id = p.program_id) AS countReview,
+        (SELECT COUNT(wish_id) FROM wish WHERE program_id = p.program_id) AS countWish
+        FROM program p
+        JOIN workshop w ON p.workshop_id = w.workshop_id
+        WHERE p.active = true AND p.approved = '승인'
+        ORDER BY avgRating desc
+    </select>
+
+    <select id="selectOne" resultType="Program" parameterType="int">
+        SELECT * FROM program WHERE program_id = #{programId}
+    </select>
+
+    <select id="selectProgramInfo" resultType="ProgramDTO" parameterType="int">
+        SELECT
+        p.program_id,
+        p.title,
+        p.price,
+        p.category,
+        p.description,
+        p.duration_min,
+        p.difficulty,
+        p.active,
+        p.thumb,
+        p.approved,
+        ws.workshop_id,
+        ws.name AS workshopName,
+        ws.address,
+        ws.profile_img,
+        IFNULL(AVG(r.rating), 0) AS avgRating,
+        COUNT(DISTINCT r.review_id) AS countReview,
+        COUNT(DISTINCT q.qna_id) AS countQna,
+        COUNT(DISTINCT w.wish_id) AS countWish
+        FROM program p
+        JOIN workshop ws ON p.workshop_id = ws.workshop_id
+        LEFT JOIN review r ON p.program_id = r.program_id
+        LEFT JOIN qna_workshop q ON p.program_id = q.program_id
+        LEFT JOIN wish w ON p.program_id = w.program_id AND w.active = TRUE
+        WHERE p.program_id = #{programId}
+    </select>
+
+    <select id="selectPrograms" resultType="ProgramDTO" parameterType="int">
+        SELECT
+        p.program_id,
+        p.title,
+        p.price,
+        p.category,
+        p.active,
+        p.approved,
+        p.thumb,
+        ws.workshop_id,
+        ws.name,
+        ws.address,
+        IFNULL(AVG(r.rating), 0) AS avgRating,
+        COUNT(DISTINCT r.review_id) AS countReview,
+        COUNT(DISTINCT w.wish_id) AS countWish
+        FROM program p
+        JOIN workshop ws ON p.workshop_id = ws.workshop_id
+        LEFT JOIN review r ON p.program_id = r.program_id
+        LEFT JOIN wish w ON p.program_id = w.program_id AND w.active = TRUE
+        WHERE ws.workshop_id = #{workshopId} AND p.approved = '승인'
+        GROUP BY p.program_id
+    </select>
+
+    <select id="categoryAll" resultType="String">
+        SELECT DISTINCT(category) FROM program
+    </select>
+
+    <select id="programSearch" parameterType="ProgramDTO" resultType="ProgramDTO">
+        SELECT DISTINCT
+        p.*,
+        w.name AS name,
+        w.address AS address,
+        w.contact_number,
+        w.profile_img AS profileImg,
+        -- 프로그램별 찜 개수 (wish 테이블 기준)
+        COALESCE(wish_count_table.countWish, 0) AS countWish,
+        COALESCE(review_table.avgRating, 0) AS avgRating,
+        COALESCE(review_table.reviewCount, 0) AS reviewCount
+
+        FROM program p
+        JOIN workshop w
+        ON p.workshop_id = w.workshop_id
+        LEFT JOIN schedule s
+        ON s.program_id = p.program_id
+        -- 여기에 위시 테이블을 연결
+        LEFT JOIN (
+        SELECT program_id, COUNT(*) AS countWish  FROM wish
+        WHERE active = 1   GROUP BY program_id
+        ) AS wish_count_table
+        ON p.program_id = wish_count_table.program_id
+        -- 리뷰 평균 테이블 연결
+        LEFT JOIN (
+        SELECT program_id, AVG(rating) AS avgRating, COUNT(*) AS reviewCount
+        FROM review
+        GROUP BY program_id
+        ) AS review_table
+        ON p.program_id = review_table.program_id
+
+        WHERE p.active = true AND p.approved = '승인'
+        <if test="keyword != null and keyword != ''">
+            <foreach item="word" collection="keyword.split(' ')" open="AND (" separator="AND" close=")">
+                (
+                p.title LIKE CONCAT('%', #{word}, '%')
+                OR w.address LIKE CONCAT('%', #{word}, '%')
+                OR p.category LIKE CONCAT('%', #{word}, '%')
+                OR w.name LIKE CONCAT('%', #{word}, '%')
+                )
+            </foreach>
+        </if>
+
+        <if test="region != null and region != '' and region != '전체'">
+            AND w.address LIKE CONCAT('%', #{region}, '%')
+        </if>
+
+        <if test="category != null and category != '' and category != '전체'">
+            AND p.category = #{category}
+        </if>
+
+        <choose>
+            <when test="capacity != null and capacity &lt; 10">
+                AND (s.capacity >= #{capacity} OR s.schedule_id IS NULL)
+            </when>
+            <when test="capacity != null and capacity &gt;= 10 and capacity &lt;= 19">
+                AND (s.capacity >= 10 OR s.schedule_id IS NULL)
+            </when>
+            <when test="capacity != null and capacity &gt;= 20 and capacity &lt;= 29">
+                AND (s.capacity >= 20 OR s.schedule_id IS NULL)
+            </when>
+            <when test="capacity != null and capacity &gt;= 30">
+                AND (s.capacity >= 30 OR s.schedule_id IS NULL)
+            </when>
+        </choose>
+        <choose>
+            <when test="durationMin == null">
+            </when>
+            <when test="durationMin &lt;= 60">
+                AND p.duration_min BETWEEN 0 AND 60
+            </when>
+            <when test="durationMin &gt;= 61 and durationMin &lt;= 120">
+                AND p.duration_min BETWEEN 61 AND 120
+            </when>
+            <when test="durationMin &gt;= 121 and durationMin &lt;= 180">
+                AND p.duration_min BETWEEN 121 AND 180
+            </when>
+            <when test="durationMin &gt;= 181">
+                AND p.duration_min &gt;= 181
+            </when>
+        </choose>
+        <if test="difficultyList != null and difficultyList.size() > 0">
+            AND p.difficulty IN
+            <foreach collection="difficultyList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        <if test="minPrice != null">
+            AND p.price &gt;= #{minPrice}
+        </if>
+        <if test="maxPrice != null">
+            AND p.price &lt;= #{maxPrice}
+        </if>
+
+        <choose>
+            <when test="sortOption == 'latest'">
+                ORDER BY p.program_id DESC
+            </when>
+            <when test="sortOption == 'rating'">
+                ORDER BY avgRating DESC
+            </when>
+            <when test="sortOption == 'price-asc'">
+                ORDER BY p.price ASC
+            </when>
+            <when test="sortOption == 'price-desc'">
+                ORDER BY p.price DESC
+            </when>
+            <when test="sortOption == 'short-time'">
+                ORDER BY COALESCE(p.duration_min, 99999) ASC
+            </when>
+            <when test="sortOption == 'long-time'">
+                ORDER BY COALESCE(p.duration_min, -1) DESC
+            </when>
+            <when test="sortOption == 'a-to-z'">
+                ORDER BY w.name ASC
+            </when>
+            <when test="sortOption == 'z-to-a'">
+                ORDER BY w.name DESC
+            </when>
+            <otherwise>
+                ORDER BY p.program_id DESC
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="selectCP" parameterType="int" resultType="ProgramDTO">
+        SELECT
+        r.reservation_id,
+        r.total_price,
+        r.num_people,
+        p.active,
+        p.program_id,
+        p.title,
+        p.thumb,
+        w.workshop_id,
+        w.name AS name,
+
+        s.start_time     -- 내가 수강한 날짜
+        FROM reservation r
+        JOIN schedule s ON r.schedule_id = s.schedule_id
+        JOIN program p ON s.program_id = p.program_id
+        JOIN workshop w ON p.workshop_id = w.workshop_id
+        WHERE
+        r.user_id = #{userId}
+        AND r.status IN ('확정', '수강종료')
+        AND s.end_time &lt; NOW()
+        ORDER BY s.start_time DESC
+    </select>
+
+    <insert id="programAdd" parameterType="Program" useGeneratedKeys="true" keyProperty="programId">
+        INSERT INTO program (
+        workshop_id, title, description, category, price, duration_min, difficulty, thumb, schedule_type, period_start, period_end
+        ) VALUES (
+        #{workshopId}, #{title}, #{description}, #{category}, #{price}, #{durationMin}, #{difficulty}, #{thumb}, #{scheduleType}, #{periodStart}, #{periodEnd})
+    </insert>
+
+    <update id="programThumb" parameterType="Program">
+        UPDATE program
+        SET thumb = #{thumb}
+        WHERE program_id = #{programId}
+    </update>
+
+    <update id="programModi" parameterType="Program">
+        UPDATE program
+        SET title=#{title},
+        description =#{description},
+        price =#{price},
+        difficulty =#{difficulty},
+        duration_min = #{durationMin},
+        created_at = NOW()
+        WHERE program_id =#{programId}
+    </update>
+
+    <update id="programActive" parameterType="Program">
+        UPDATE program
+        SET active = #{active}
+        <where>
+            <if test="workshopId != null">
+                workshop_id = #{workshopId}
+            </if>
+            <if test="programId != null and workshopId == null">
+                program_id = #{programId}
+            </if>
+        </where>
+    </update>
+
+    <select id="programImages" parameterType="int" resultType="ProgramImage">
+        SELECT program_image_id, image, img_no FROM program_image WHERE program_id = #{programId}
+    </select>
+
+    <update id="updateProgramApproved" parameterType="ApprovalDTO">
+        UPDATE program
+        SET approved = #{approved}
+        WHERE program_id = #{targetId}
+    </update>
+
+    <select id="selectProgramList" parameterType="SearchDTO" resultType="ProgramDTO">
+        SELECT
+            p.program_id,
+            p.title,
+            p.approved,
+            p.created_at,
+            w.workshop_id,
+            w.name,
+            u.email
+        FROM program p
+        JOIN workshop w ON w.workshop_id = p.workshop_id
+        LEFT JOIN user u ON w.owner_id = u.user_id
+
+        WHERE 1=1
+        <if test="filter != null and filter != 'ALL'">
+            AND p.approved = #{filter}
+        </if>
+
+        <if test="keyword != null and keyword != ''">
+            AND (w.name LIKE CONCAT('%', #{keyword}, '%')
+            OR p.title LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+
+        ORDER BY
+        <choose>
+            <when test="sortBy != null">
+                ${sortBy} ${sortDir}
+            </when>
+            <otherwise>
+                p.created_at DESC
+            </otherwise>
+        </choose>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countProgramList" parameterType="SearchDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM program p
+        JOIN workshop w ON w.workshop_id = p.workshop_id
+        LEFT JOIN user u ON w.owner_id = u.user_id
+        WHERE 1=1
+        <if test="filter != null and filter != 'ALL'">
+            AND p.approved = #{filter}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (w.name LIKE CONCAT('%', #{keyword}, '%')
+            OR p.title LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <select id="selectProgramDetail" parameterType="int" resultType="ProgramDTO">
+        SELECT
+            p.program_id,
+            p.title,
+            p.description,
+            p.category,
+            p.price,
+            p.thumb,
+            p.duration_min,
+            p.difficulty,
+            p.schedule_type,
+            p.period_start,
+            p.period_end,
+            p.status,
+            p.active,
+            p.approved,
+            p.created_at,
+            w.workshop_id,
+            w.name,
+            u.user_id,
+            u.name AS user_name,
+            u.email
+        FROM program p
+            JOIN workshop w ON w.workshop_id = p.workshop_id
+            LEFT JOIN user u ON w.owner_id = u.user_id
+        WHERE program_id = #{programId}
+    </select>
+
+    <select id="programReject" parameterType="int" resultType="ProgramDTO">
+        SELECT p.program_id,p.workshop_id, p.title, p.approved, a.reason, a.created_at AS logCreatedAt FROM program p
+        JOIN action_log a ON p.program_id = a.target_id AND a.target_type = 'PROGRAM'
+        WHERE p.approved = '거절' AND p.program_id = #{programId}
+        ORDER BY a.created_at DESC
+        LIMIT 1
+    </select>
+</mapper>

@@ -1,0 +1,186 @@
+/* AdminNotice 통합 스타일 시트 */
+
+/* 1. AdminNotice 전체 컨테이너 */
+.erp-an-page {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+  font-family: "Pretendard", sans-serif;
+  color: #222;
+}
+
+/* 2. 버튼 공통 스타일 */
+.erp-an-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px; /* 6px로 통일 */
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  background-color: #111;
+  transition: 0.3s;
+}
+
+.erp-an-btn:hover {
+  background-color: #333;
+}
+
+/* 취소/보조 버튼 */
+.erp-an-btn-cancel {
+  background-color: #888;
+}
+
+.erp-an-btn-cancel:hover {
+  background-color: #555;
+}
+
+/* 3. 공지사항 리스트 (Board Table) */
+.erp-an-board {
+  margin-top: 20px;
+}
+
+.erp-an-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.erp-an-table th,
+.erp-an-table td {
+  text-align: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  word-break: keep-all;
+}
+
+.erp-an-table th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+/* 컬럼별 폭 - 기존 비율 유지 */
+.erp-an-table th:nth-child(1),
+.erp-an-table td:nth-child(1) {
+  width: 15%; /* 대상 */
+}
+.erp-an-table th:nth-child(2),
+.erp-an-table td:nth-child(2) {
+  width: 45%; /* 제목 */
+  text-align: left; /* 제목은 왼쪽 정렬 */
+  padding-left: 15px;
+}
+.erp-an-table th:nth-child(3),
+.erp-an-table td:nth-child(3) {
+  width: 20%; /* 작성자 */
+}
+.erp-an-table th:nth-child(4),
+.erp-an-table td:nth-child(4) {
+  width: 20%; /* 작성일 */
+}
+
+.erp-an-table-row:hover {
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+/* 4. 공지사항 상태 배지 */
+.erp-an-status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  min-width: 60px;
+  text-align: center;
+}
+
+.erp-an-status-사내 {
+  background-color: #5cb85c; /* 초록 */
+}
+
+.erp-an-status-고객 {
+  background-color: #5bc0de; /* 하늘 */
+}
+
+/* 5. 작성 폼 및 뷰 공통 (Form / Detail View) */
+.erp-an-form,
+.erp-an-view {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  font-family: "Pretendard", sans-serif;
+}
+
+/* input, textarea, select 통일 스타일 */
+.erp-an-input,
+.erp-an-textarea,
+.erp-an-select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  font-family: "Pretendard", sans-serif;
+}
+
+.erp-an-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* select 스타일 */
+.erp-an-select {
+  appearance: none;
+  background-color: #fff;
+  color: #222;
+  cursor: pointer;
+  /* select 박스 끝에 사용자 정의 화살표 추가 가능 */
+}
+
+/* 6. 버튼 그룹 */
+.erp-an-form-btns,
+.erp-an-view-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px; /* 폼 아래 여백 */
+}
+
+/* 7. 기타 뷰 스타일 (Detail) */
+.erp-an-title {
+  font-size: 24px; /* Detail View Title */
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 15px;
+}
+
+.erp-an-type,
+.erp-an-content,
+.erp-an-meta {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.erp-an-content {
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+}
+
+.erp-an-meta {
+  color: #666;
+  text-align: right;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+/* 8. 빈 메시지 */
+.erp-an-empty-message {
+  text-align: center;
+  padding: 20px 0;
+  color: #888;
+}
+.erp-an-content {
+  white-space: pre-line;
+}

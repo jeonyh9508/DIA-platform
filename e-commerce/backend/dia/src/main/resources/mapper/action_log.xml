@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ActionLogDAO">
+
+    <resultMap id="ActionLogMap" type="ActionLog">
+        <id property="actionLogId" column="action_log_id"/>
+        <result property="targetType" column="target_type"/>
+        <result property="targetId" column="target_id"/>
+        <result property="adminId" column="admin_id"/>
+        <result property="actionType" column="action_type"/>
+        <result property="reason" column="reason"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <insert id="insertActionLog" parameterType="ActionLog">
+        INSERT INTO action_log(target_type, target_id, admin_id, action_type, reason)
+        VALUES(#{targetType}, #{targetId}, #{adminId}, #{actionType}, #{reason})
+    </insert>
+
+    <select id="actionLogList" resultType="ActionLogDTO" parameterType="ActionLogDTO">
+        SELECT
+        a.action_log_id,
+        a.target_type,
+        a.target_id,
+        a.admin_id,
+        u.name AS adminName,
+        a.action_type,
+        a.reason,
+        a.created_at,
+        s.monthly,
+        s.workshop_id,
+        CASE a.target_type
+        WHEN 'WORKSHOP' THEN w.name
+        WHEN 'PROGRAM' THEN p.title
+        WHEN 'QNA' THEN qu.name
+        WHEN 'SETTLEMENT' THEN sw.name
+        END AS targetName
+        FROM action_log a
+        JOIN user u ON a.admin_id = u.user_id
+        LEFT JOIN workshop w ON a.target_id = w.workshop_id AND a.target_type = 'WORKSHOP'
+        LEFT JOIN program p ON a.target_id = p.program_id AND a.target_type = 'PROGRAM'
+        LEFT JOIN qna_admin q ON a.target_id = q.qna_admin_id AND a.target_type = 'QNA'
+        LEFT JOIN user qu ON q.user_id = qu.user_id AND a.target_type = 'QNA'
+        LEFT JOIN settlement s ON a.target_id = s.settlement_id AND a.target_type = 'SETTLEMENT'
+        LEFT JOIN workshop sw ON s.workshop_id = sw.workshop_id
+
+        <where>
+            <if test="targetType != null and targetType != '' and targetType != 'ALL'">
+                AND a.target_type = #{targetType}
+            </if>
+
+            <if test="keyword != null and keyword != ''">
+                AND (
+                u.name LIKE CONCAT('%', #{keyword}, '%') OR w.name LIKE CONCAT('%', #{keyword}, '%') OR p.title LIKE
+                CONCAT('%', #{keyword}, '%') OR qu.name LIKE CONCAT('%', #{keyword}, '%') OR sw.name LIKE CONCAT('%',
+                #{keyword}, '%') OR a.action_type LIKE CONCAT('%', #{keyword}, '%') )
+            </if>
+        </where>
+
+        ORDER BY a.created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countActionLog" parameterType="ActionLogDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM action_log a
+        JOIN user u ON a.admin_id = u.user_id
+        LEFT JOIN workshop w ON a.target_id = w.workshop_id AND a.target_type = 'WORKSHOP'
+        LEFT JOIN program p ON a.target_id = p.program_id AND a.target_type = 'PROGRAM'
+        LEFT JOIN qna_admin q ON a.target_id = q.qna_admin_id AND a.target_type = 'QNA'
+        LEFT JOIN user qu ON q.user_id = qu.user_id AND a.target_type = 'QNA'
+        LEFT JOIN settlement s ON a.target_id = s.settlement_id AND a.target_type = 'SETTLEMENT'
+        LEFT JOIN workshop sw ON s.workshop_id = sw.workshop_id
+
+        <where>
+            <if test="targetType != null and targetType != '' and targetType != 'ALL'">
+                AND a.target_type = #{targetType}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                u.name LIKE CONCAT('%', #{keyword}, '%')
+                OR w.name LIKE CONCAT('%', #{keyword}, '%')
+                OR p.title LIKE CONCAT('%', #{keyword}, '%')
+                OR qu.name LIKE CONCAT('%', #{keyword}, '%')
+                OR sw.name LIKE CONCAT('%', #{keyword}, '%')
+                OR a.action_type LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="approvalLogList" parameterType="SearchDTO" resultType="ActionLogDTO">
+        SELECT
+            a.action_log_id,
+            a.target_type,
+            a.target_id,
+            a.admin_id,
+            u.name AS adminName,
+            a.action_type,
+            a.reason,
+            a.created_at,
+        CASE a.target_type
+            WHEN 'WORKSHOP' THEN w.name
+            WHEN 'PROGRAM' THEN p.title
+        END AS targetName,
+        CASE a.target_type
+            WHEN 'PROGRAM' THEN ws.name
+            ELSE NULL
+        END AS workshopName
+        FROM action_log a
+            JOIN user u
+            ON a.admin_id = u.user_id
+        LEFT JOIN workshop w
+            ON a.target_id = w.workshop_id
+            AND a.target_type = 'WORKSHOP'
+        LEFT JOIN program p
+            ON a.target_id = p.program_id
+            AND a.target_type = 'PROGRAM'
+        LEFT JOIN workshop ws
+            ON p.workshop_id = ws.workshop_id
+            AND a.target_type = 'PROGRAM'
+
+        <where>
+            <choose>
+                <!-- 둘 다 true OR 둘 다 false → 전체 -->
+                <when test="(workshop == true and program == true) or (workshop == false and program == false)">
+                    a.target_type IN ('WORKSHOP', 'PROGRAM')
+                </when>
+
+                <!-- 공방만 -->
+                <when test="workshop == true and program == false">
+                    a.target_type = 'WORKSHOP'
+                </when>
+
+                <!-- 프로그램만 -->
+                <when test="workshop == false and program == true">
+                    a.target_type = 'PROGRAM'
+                </when>
+            </choose>
+
+            <if test="filter != null and filter != 'ALL'">
+                AND a.action_type = #{filter}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (w.name LIKE CONCAT('%', #{keyword}, '%')
+                OR p.title LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+
+        ORDER BY
+        <choose>
+            <when test="sortBy != null">
+                ${sortBy} ${sortDir}
+            </when>
+            <otherwise>
+                a.created_at DESC
+            </otherwise>
+        </choose>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countApprovalLog" parameterType="SearchDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM action_log a
+            JOIN user u
+            ON a.admin_id = u.user_id
+        LEFT JOIN workshop w
+            ON a.target_id = w.workshop_id
+            AND a.target_type = 'WORKSHOP'
+        LEFT JOIN program p
+            ON a.target_id = p.program_id
+            AND a.target_type = 'PROGRAM'
+        LEFT JOIN workshop ws
+            ON p.workshop_id = ws.workshop_id
+            AND a.target_type = 'PROGRAM'
+
+        <where>
+            <choose>
+                <when test="(workshop == true and program == true) or (workshop == false and program == false)">
+                    a.target_type IN ('WORKSHOP', 'PROGRAM')
+                </when>
+
+                <when test="workshop == true and program == false">
+                    a.target_type = 'WORKSHOP'
+                </when>
+
+                <when test="workshop == false and program == true">
+                    a.target_type = 'PROGRAM'
+                </when>
+            </choose>
+
+            <if test="filter != null and filter != 'ALL'">
+                AND a.action_type = #{filter}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (w.name LIKE CONCAT('%', #{keyword}, '%')
+                OR p.title LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
+
+</mapper>

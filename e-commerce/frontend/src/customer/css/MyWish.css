@@ -1,0 +1,208 @@
+/* 페이지 전체 컨테이너 */
+.wishlist-page-container {
+  max-width: 900px;
+  margin: 0px auto;
+  padding: 0 20px;
+}
+
+.wishlist-page-container .page-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 30px;
+
+  color: #333;
+}
+
+/* 위시리스트 그리드 */
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* 반응형 그리드 */
+  gap: 25px;
+  justify-content: center; /* 아이템 중앙 정렬 */
+}
+
+/* 프로그램 카드 스타일 */
+.program-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none; /* Link 기본 스타일 제거 */
+  color: inherit; /* Link 기본 색상 제거 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 썸네일 영역 */
+.thumbnail-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 비율 유지 (높이 / 너비 * 100) */
+  overflow: hidden;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.program-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 잘리지 않고 꽉 차게 */
+  border-radius: 12px 12px 0 0;
+}
+
+/* 썸네일 위 태그 (예: 베이킹) */
+.program-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #f7e6e6; /* 연한 분홍색 */
+  color: #d17a80; /* 진한 분홍색 */
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.85em;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* 하트 아이콘 */
+.wish-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: background-color 0.2s;
+}
+
+.wish-icon:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+/* 별점, 리뷰 수, 위시 수 */
+.program-meta-top-right {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+.program-meta-top-right .rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.program-meta-top-right .wish-count {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* 프로그램 정보 섹션 */
+.program-info {
+  padding: 15px 15px 20px 15px; /* 하단 패딩을 좀 더 줌 */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* 남은 공간을 채우도록 */
+}
+
+/* 공방 프로필 이미지, 공방명, 프로그램명 */
+.workshop-program-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.workshop-profile-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ddd; /* 프로필 이미지 없을 때 기본 배경색 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7em; /* 텍스트 Placeholder용 */
+  color: #666;
+  overflow: hidden; /* 이미지가 넘칠 경우 대비 */
+}
+
+.workshop-profile-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.workshop-name {
+  padding-top: 5px;
+  font-size: 0.9em;
+  color: #777;
+  font-weight: 500;
+}
+
+.program-name {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  max-height: 2.8em; /* 2줄까지만 표시 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 넘치는 텍스트 ... 처리 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+/* 위치 아이콘과 주소 */
+.program-location-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f5f5f5; /* 회색 배경 */
+  border-radius: 5px;
+  padding: 6px 10px;
+  margin-top: auto; /* 하단으로 밀착 */
+  margin-bottom: 15px; /* 가격과의 간격 */
+  font-size: 0.85em;
+  color: #555;
+  font-weight: 500;
+}
+
+.location-icon {
+  font-size: 1em;
+}
+
+/* 가격 */
+.program-price {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #000;
+  text-align: right; /* 가격 오른쪽 정렬 */
+}

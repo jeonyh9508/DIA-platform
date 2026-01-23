@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ReservationDAO">
+
+    <select id="selectMyRV" parameterType="int" resultType="ReservationDTO">
+        SELECT
+        r.reservation_id,
+        r.num_people,
+        r.total_price,
+        r.status,
+        r.reserved_at,
+
+        s.start_time,
+        s.end_time,
+
+        pr.program_id,
+        pr.title,
+        pr.thumb,
+
+        w.workshop_id
+        FROM reservation AS r
+        LEFT JOIN schedule AS s
+        ON r.schedule_id = s.schedule_id
+        LEFT JOIN program AS pr
+        ON s.program_id = pr.program_id
+        LEFT JOIN workshop AS w
+        ON pr.workshop_id = w.workshop_id
+        WHERE r.user_id = #{userId}
+        ORDER BY  r.reserved_at DESC
+    </select>
+
+    <select id="selectRVDetail" parameterType="int" resultType="ReservationDTO">
+        SELECT
+        r.reservation_id,
+        r.num_people,
+        r.total_price,
+        r.status,
+        r.reserved_at,
+
+        s.schedule_id,
+        s.start_time,
+        s.end_time,
+
+        pr.program_id,
+        pr.title,
+        pr.price,
+        pr.thumb,
+
+        u.user_id,
+        u.name,
+        u.email,
+        u.phone,
+
+        w.workshop_id,
+        w.address,
+
+        p.payment_id,
+        p.method,
+        p.status AS paymentStatus,
+        p.paid_at
+        FROM reservation r
+        LEFT JOIN schedule s ON r.schedule_id = s.schedule_id
+        LEFT JOIN program pr ON s.program_id = pr.program_id
+        LEFT JOIN user u ON r.user_id = u.user_id
+        LEFT JOIN workshop w ON pr.workshop_id = w.workshop_id
+        LEFT JOIN payment p ON r.reservation_id = p.reservation_id
+        WHERE
+        r.reservation_id = #{reservationId}
+    </select>
+
+    <select id="wsReservation" parameterType="WorkshopDTO" resultType="ReservationDTO">
+        SELECT
+        r.reservation_id,
+        p.title,
+        u.name,
+        u.phone,
+        s.start_time,
+        s.end_time,
+        r.status
+        FROM
+        workshop w
+        JOIN program p ON w.workshop_id = p.workshop_id
+        JOIN schedule s ON p.program_id = s.program_id
+        JOIN reservation r ON s.schedule_id = r.schedule_id
+        JOIN user u ON r.user_id = u.user_id
+        <where>
+            <choose>
+                <when test="programId != null">
+                    p.program_id = #{programId}
+                </when>
+                <when test="workshopId != null">
+                    w.workshop_id = #{workshopId}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <insert id="insertReservation" parameterType="Reservation"  useGeneratedKeys="true" keyProperty="reservationId">
+        INSERT INTO reservation(schedule_id, user_id, num_people, total_price)
+        VALUES(#{scheduleId}, #{userId}, #{numPeople}, #{totalPrice})
+    </insert>
+
+    <update id="updateReservation" parameterType="Reservation">
+        UPDATE reservation
+        SET status = #{status}
+        WHERE reservation_id = #{reservationId}
+    </update>
+
+
+    <select id="findFinishedId" resultType="Integer">
+        SELECT r.reservation_id
+        FROM reservation r
+        JOIN payment p ON p.reservation_id = r.reservation_id
+        JOIN schedule s ON s.schedule_id = r.schedule_id
+        WHERE r.status = '확정'
+        AND p.status = '완료'
+        AND s.start_time &lt;= NOW()
+        AND s.end_time &lt;= NOW()
+    </select>
+
+    <update id="finishReservation">
+        UPDATE reservation
+        SET status = '수강종료'
+        WHERE reservation_id IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+
+    <select id="viewFinishRV" resultType="ReservationDTO">
+        SELECT * FROM reservation WHERE status="수강종료" AND profit_paid = false
+    </select>
+
+    <update id="profitPaid" parameterType="int">
+        UPDATE reservation SET profit_paid = true WHERE reservation_id = #{reservationId}
+    </update>
+
+    <update id="cancelWaiting">
+        UPDATE reservation
+        SET status = '취소'
+        WHERE status = '대기'
+        AND schedule_id IN
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

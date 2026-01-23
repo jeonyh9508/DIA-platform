@@ -1,0 +1,53 @@
+.my-program {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-program-nav {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr; /* 각 열 비율 */
+  text-align: center;
+  font-weight: 600;
+  background-color: #f9f9f9;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.my-program-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-program-card {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr; /* nav와 동일한 열 비율 */
+  align-items: center;
+  text-align: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.my-program-thumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 180px;
+  height: 130px;
+  border-radius: 6px;
+}
+
+/* 실제 이미지가 들어올 경우 */
+.my-program-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.my-program-card span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+}

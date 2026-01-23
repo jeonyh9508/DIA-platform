@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.AdminNoticeDAO">
+
+    <select id="noticeAll" resultType="AdminNoticeDTO">
+        SELECT
+        n.admin_notice_id,
+        n.notice_title,
+        n.notice_content,
+        n.created_at,
+        n.updated_at,
+        n.notice_type,
+        u.user_id AS userId,
+        u.name AS name
+        FROM
+        admin_notice n
+       JOIN
+        user u ON n.user_id = u.user_id
+        ORDER BY
+        n.created_at DESC;
+    </select>
+
+    <select id="noticeOne" resultType="AdminNoticeDTO" parameterType="int">
+        SELECT
+        n.admin_notice_id,
+        n.notice_title,
+        n.notice_content,
+        n.created_at,
+        n.updated_at,
+        n.notice_type,
+        u.user_id AS userId,
+        u.name AS name
+        FROM
+        admin_notice n
+        JOIN
+        user u ON n.user_id = u.user_id
+        WHERE admin_notice_id = #{adminNoticeId}
+    </select>
+
+    <insert id="noticeAdd" parameterType="AdminNotice">
+        INSERT INTO admin_notice (notice_title, notice_content, notice_type, user_id) VALUES
+        (#{noticeTitle},#{noticeContent},#{noticeType} ,#{userId})
+    </insert>
+    <update id="noticeModi" parameterType="AdminNotice">
+        UPDATE admin_notice SET notice_title = #{noticeTitle},notice_type = #{noticeType}, notice_content = #{noticeContent} WHERE admin_notice_id = #{adminNoticeId}
+    </update>
+    <delete id="noticeDel" parameterType="int">
+        DELETE FROM admin_notice WHERE admin_notice_id = #{adminNoticeId}
+    </delete>
+</mapper>

@@ -1,0 +1,120 @@
+.ws-report-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ws-report-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #eee;
+  padding-bottom: 10px;
+}
+
+.ws-table-wrapper {
+  overflow-x: auto;
+}
+
+.ws-qna-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ws-qna-table thead tr {
+  background-color: #555;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ws-qna-table th {
+  padding: 15px 10px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ws-qna-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.ws-qna-table tbody tr:hover {
+  background-color: #f8f8f8;
+}
+
+.ws-qna-table td {
+  padding: 12px 10px;
+  font-size: 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.ws-qna-table tbody tr td[colspan="6"] {
+  padding: 30px;
+  color: #999;
+  font-style: italic;
+  background-color: #fff;
+  text-align: center;
+}
+
+.ws-view-button {
+  background-color: #777;
+  color: white;
+  border: 1px solid #777;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.ws-view-button:hover {
+  background-color: #555;
+  border-color: #555;
+}
+
+.ws-qna-status-completed {
+  color: #555;
+  font-weight: 600;
+}
+
+.ws-qna-status-pending {
+  color: #c09853;
+  font-weight: 600;
+}
+
+.ws-pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 5px;
+}
+
+.ws-page-button {
+  background-color: #fff;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+.ws-page-button:hover:not(.active) {
+  background-color: #f0f0f0;
+}
+
+.ws-page-button.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+  font-weight: 700;
+}

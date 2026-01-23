@@ -1,0 +1,27 @@
+.my-follow-info {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 10px;
+}
+
+.my-follow-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px;
+  padding: 25px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+.my-follow-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.my-follow-card .workshop-name {
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+}

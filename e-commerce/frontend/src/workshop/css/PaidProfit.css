@@ -1,0 +1,269 @@
+.ws-paid-profit-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.ws-profit-loading,
+.ws-profit-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 1rem;
+}
+
+.ws-profit-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.ws-profit-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.ws-profit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.ws-profit-table th,
+.ws-profit-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ws-profit-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ws-profit-table td {
+  color: #333;
+}
+
+.ws-profit-table td {
+  color: #333;
+}
+
+.ws-profit-summary {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.ws-align-right {
+  text-align: right;
+}
+.ws-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  font-size: 1rem;
+}
+
+.ws-summary-label {
+  color: #555;
+  font-weight: 500;
+}
+
+.ws-summary-value {
+  color: #333;
+  font-weight: 600;
+}
+
+.ws-summary-row.ws-summary-total {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dashed #ccc;
+  font-size: 1.15rem;
+}
+
+.ws-summary-total .ws-summary-label {
+  color: #333;
+  font-weight: 700;
+}
+
+.ws-summary-total .ws-summary-value .ws-negative {
+  color: #d9534f;
+  font-weight: 700;
+}
+
+.ws-profit-actions {
+  margin-top: 24px;
+  text-align: right;
+}
+
+.ws-btn-confirm,
+.ws-btn-cancel {
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.ws-btn-confirm:active,
+.ws-btn-cancel:active {
+  transform: scale(0.98);
+}
+
+.ws-btn-confirm {
+  background-color: #333;
+  color: #ffffff;
+}
+
+.ws-btn-confirm:hover {
+  background-color: #555;
+}
+
+.ws-account-info {
+  margin-top: 24px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.ws-account-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.ws-account-details {
+  text-align: center;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.ws-account-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ws-btn-cancel {
+  background-color: #555;
+  color: #ffffff;
+}
+
+.ws-btn-cancel:hover {
+  background-color: #333;
+}
+/* 버튼 그룹 */
+.ws-profit-btn-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+/* 공통 버튼 스타일 */
+.ws-profit-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #ccc; /* 기본 무채색 테두리 */
+  background: inherit; /* 배경은 상속 */
+  color: #333;
+  transition: 0.2s ease, border-color 0.2s ease;
+}
+
+.ws-profit-btn-refund {
+  border-color: #333;
+  color: #333;
+}
+
+.ws-profit-btn-refund:hover {
+  border-color: #636363;
+  color: #636363;
+}
+.ws-profit-btn-approve {
+  border-color: #333;
+  color: #333;
+}
+
+.ws-profit-btn-approve:hover {
+  border-color: #2e9b45;
+  color: #2e9b45;
+}
+
+.ws-profit-btn-adjust {
+  border-color: #333;
+  color: #333;
+}
+
+.ws-profit-btn-adjust:hover {
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.ws-profit-btn-submit {
+  border-color: #333;
+  color: #333;
+}
+
+.ws-profit-btn-submit:hover {
+  border-color: #636363;
+  color: #636363;
+}
+
+.ws-profit-adjust-form {
+  margin-top: 12px;
+  display: flex;
+  width: 100%;
+}
+
+.ws-profit-select,
+.ws-profit-input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: inherit;
+  color: #333;
+}
+
+.ws-profit-select:focus,
+.ws-profit-input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.ws-adjust-form-data {
+  display: flex;
+  gap: 10px;
+}
+
+.ws-profit-adjust-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.ws-summary-row.ws-summary-total span {
+  color: #d9534f;
+  font-weight: 700;
+}

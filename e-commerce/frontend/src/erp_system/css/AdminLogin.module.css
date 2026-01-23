@@ -1,0 +1,152 @@
+/* 전체 화면 배경 */
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.backButton {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  .backButton:hover {
+    color: #111;
+    transform: translateX(-4px);
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 6px;
+  }
+
+  .backIcon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    display: block;
+  }
+
+/* 로그인 카드 */
+.loginCard {
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* 제목 */
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* 입력 폼 영역 */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s;
+  box-sizing: border-box; /* 패딩 포함 너비 계산 */
+}
+
+.input:focus {
+  border-color: #4a90e2; /* 포커스 시 파란색 강조 */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* 로그인 버튼 */
+.loginButton {
+  width: 100%;
+  padding: 14px;
+  background-color: #2d3436; /* 짙은 차콜색 (신뢰감) */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 30px;
+}
+
+.loginButton:hover {
+  background-color: #000;
+}
+
+/* 에러 메시지 */
+.errorMessage {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  color: #ff4d4f;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.resetPwdMent{
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: auto;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.loginRefer {
+  color: #888;
+  font-size: 12px;
+}

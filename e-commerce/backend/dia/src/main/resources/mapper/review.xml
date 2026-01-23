@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ReviewDAO">
+    <select id="selectAll" parameterType="int" resultType="ReviewDTO">
+        SELECT
+        r.review_id,
+        r.user_id,
+        r.program_id,
+        r.rating,
+        r.content,
+        r.review_image,
+        r.created_at,
+        u.name,
+        u.profile_img
+        FROM review r
+        LEFT JOIN user u ON r.user_id = u.user_id
+        WHERE program_id = #{programId}
+        ORDER BY r.created_at DESC
+    </select>
+
+    <select id="selectAllCount" parameterType="int" resultType="int">
+        SELECT count(*) FROM review WHERE program_id = #{programId}
+    </select>
+
+    <select id="selectRating" parameterType="int" resultType="double">
+        SELECT IFNULL(AVG(rating), 0) AS averageRating
+        FROM review
+        WHERE program_id = #{programId}
+    </select>
+
+    <select id="selectMyReview" parameterType="int" resultType="ReviewDTO">
+        SELECT
+        r.review_id,
+        u.user_id,
+        p.program_id,
+        p.workshop_id,
+        r.reservation_id,
+        r.rating AS rating,
+        r.content,
+        r.created_at,
+        r.updated_at,
+        r.review_image,
+
+        u.name,
+
+        p.title,
+        p.thumb,
+        w.name AS workshopName
+
+        FROM review r
+        JOIN user u ON r.user_id = u.user_id
+        JOIN program p ON p.program_id = r.program_id
+        JOIN workshop w ON w.workshop_id = p.workshop_id
+        WHERE u.user_id = #{userId}
+    </select>
+
+    <select id="wsReview" parameterType="WorkshopDTO" resultType="ReviewDTO">
+        SELECT
+        r.review_id,
+        p.program_id,
+        p.title,
+        r.content,
+        r.rating,
+        r.created_at,
+        u.name
+        FROM
+        review r
+        JOIN program p ON r.program_id = p.program_id
+        JOIN workshop w ON p.workshop_id = w.workshop_id
+        JOIN user u ON r.user_id = u.user_id
+        <where>
+            <choose>
+                <when test="programId != null">
+                    p.program_id = #{programId}
+                </when>
+                <when test="workshopId != null">
+                    w.workshop_id = #{workshopId}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM review WHERE review_id = #{reviewId}
+    </delete>
+
+    <insert id="insertReview" parameterType="Review" useGeneratedKeys="true" keyProperty="reviewId">
+        INSERT INTO review ( user_id, program_id, reservation_id, rating, content)
+        VALUES (#{userId},#{programId},#{reservationId},#{rating},#{content})
+    </insert>
+
+    <update id="reviewImage" parameterType="Review">
+        UPDATE review
+        SET review_image =#{reviewImage}
+        WHERE review_id = #{reviewId}
+    </update>
+
+    <update id="averageRating" parameterType="int">
+        UPDATE workshop w
+        JOIN (
+        SELECT p.workshop_id, ROUND(AVG(r.rating), 2) AS avgRating
+        FROM review r
+        JOIN program p ON r.program_id = p.program_id
+        GROUP BY p.workshop_id
+        ) rating ON w.workshop_id = rating.workshop_id
+        SET w.average_rating = rating.avgRating
+        WHERE w.workshop_id = #{workshopId}
+    </update>
+
+    <update id="updateReview" parameterType="ReviewDTO">
+        UPDATE review SET content=#{content}, rating=#{rating}, updated_at = CURRENT_TIMESTAMP where review_id=#{reviewId}
+    </update>
+
+    <select id="reviewExist" parameterType="ReviewDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM review
+        WHERE program_id = #{programId}
+        AND reservation_id = #{reservationId}
+        AND user_id = #{userId};
+    </select>
+
+    <select id="findReview" parameterType="int">
+        SELECT * FROM review WHERE review_id =#{reviewId}
+    </select>
+</mapper>

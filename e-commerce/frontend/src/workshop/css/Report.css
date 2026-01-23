@@ -1,0 +1,206 @@
+.ws-report-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ws-report-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #eee;
+  padding-bottom: 10px;
+}
+
+.ws-table-wrapper {
+  overflow-x: auto;
+}
+
+.ws-qna-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 600px;
+}
+
+.ws-qna-table thead tr {
+  background-color: #555;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ws-qna-table th {
+  padding: 15px 10px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ws-qna-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.ws-qna-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ws-qna-table tbody tr:hover {
+  background-color: #f8f8f8;
+}
+
+.ws-qna-table td {
+  padding: 12px 10px;
+  font-size: 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.ws-qna-table tbody tr td[colspan="5"] {
+  padding: 30px;
+  color: #999;
+  font-style: italic;
+  background-color: #fff;
+  text-align: center;
+}
+
+.ws-view-button {
+  background-color: #777;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.ws-view-button:hover {
+  background-color: #555;
+}
+
+.ws-qna-status-completed {
+  color: #555;
+  font-weight: 600;
+}
+
+.ws-qna-status-pending {
+  color: #999;
+  font-weight: 600;
+}
+
+.ws-pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 5px;
+}
+
+.ws-page-button {
+  background-color: #fff;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+.ws-page-button:hover:not(.active) {
+  background-color: #f0f0f0;
+}
+
+.ws-page-button.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+  font-weight: 700;
+}
+
+.ws-on-btn-bar {
+  font-family: "GyeonggiMillenniumTitle";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ws-on-btn-set {
+  display: flex;
+  gap: 10px;
+}
+
+.ws-delete-btn {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.ws-delete-btn:hover {
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+.ws-qna-table tbody tr td[colspan="6"] {
+  padding: 30px;
+  color: #999;
+  font-style: italic;
+  background-color: #fff;
+  text-align: center;
+}
+
+.ws-on-header-checkbox.MuiCheckbox-root {
+  padding: 0;
+  color: white;
+}
+
+.ws-qna-table tbody .MuiCheckbox-root {
+  padding: 0;
+}
+
+.ws-on-message-cell {
+  text-align: left;
+  cursor: pointer;
+}
+
+.ws-on-message-unread {
+  font-weight: 600;
+  color: #111;
+}
+
+.ws-notification-table th:nth-child(1),
+.ws-notification-table td:nth-child(1) {
+  width: 5%;
+}
+.ws-notification-table th:nth-child(2),
+.ws-notification-table td:nth-child(2) {
+  width: 40%;
+}
+.ws-notification-table th:nth-child(3),
+.ws-notification-table td:nth-child(3) {
+  width: 20%;
+}
+.ws-notification-table th:nth-child(4),
+.ws-notification-table td:nth-child(4) {
+  width: 10%;
+}
+.ws-notification-table th:nth-child(5),
+.ws-notification-table td:nth-child(5) {
+  width: 15%;
+  font-size: 13px;
+}
+.ws-notification-table th:nth-child(6),
+.ws-notification-table td:nth-child(6) {
+  width: 10%;
+}
+
+.ws-report-container th input[type="checkbox"] {
+  accent-color: #ff0000;
+}
+.ws-report-container th input[type="checkbox"]:checked::after {
+  accent-color: #ff0000;
+}

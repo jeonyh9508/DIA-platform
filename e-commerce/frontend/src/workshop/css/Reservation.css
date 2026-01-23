@@ -1,0 +1,125 @@
+.ws-reservation-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ws-rs-title {
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.ws-rs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ws-rs-list-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 5px;
+  font-size: 15px;
+  color: #555;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ws-rs-list-item:last-child {
+  border-bottom: none;
+}
+
+.ws-rs-item-main-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.ws-rs-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.ws-rs-item-sub-info {
+  font-size: 14px;
+  color: #666;
+}
+
+.ws-rs-status {
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.ws-status-complete {
+  background-color: #e6f7ff;
+  color: #1890ff;
+}
+.ws-status-finished {
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+.ws-status-cancelled {
+  background-color: #fff1f0;
+  color: #f5222d;
+}
+
+.ws-rs-empty-message {
+  font-size: 15px;
+  color: #777;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.ws-rs-close-button {
+  margin-top: 20px;
+  float: right;
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* --- 모달 전용 덮어쓰기 스타일 (WsModal.css 충돌 해결) --- */
+
+.ws-modal-body .ws-reservation-container {
+  min-width: 750px;
+  margin: -20px;
+  padding: 20px;
+}
+
+.ws-modal-body .ws-rs-title {
+  padding-top: 10px;
+  margin: 10px 0 15px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ws-modal-body .ws-rs-list {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.ws-modal-body .ws-rs-list-item {
+  padding: 14px 18px;
+}
+
+.ws-modal-body .ws-rs-empty-message {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+  margin-top: 0;
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.SuperAdminDAO">
+    <!-- 오늘의 방문자수 -->
+    <select id="todayVisitors" resultType="int">
+        select count(*)
+        from visit_log
+        where visited_at >= CURDATE()
+    </select>
+
+    <select id="totalUsers" resultType="int">
+    <!-- 총 회원수 -->
+        select count(*)
+        from user
+        where active = true
+    </select>
+
+    <!-- 실시간 접속자 -->
+    <select id="onlineUsers" resultType="int">
+        SELECT COUNT(DISTINCT user_id)
+        FROM visit_log
+        WHERE visited_at >= #{timeLimit}
+    </select>
+
+    <!-- 실시간 트래픽 -->
+    <select id="currentTraffic" resultType="int">
+        SELECT COUNT(*)
+        FROM visit_log
+        WHERE visited_at >= #{timeLimit}
+    </select>
+
+    <!-- 주간 방문자 -->
+    <select id="weeklyTraffic" resultType="ChartDTO">
+        SELECT
+            DATE_FORMAT(visited_at, '%Y-%m-%d') AS date,
+            COUNT(*) AS count
+        FROM visit_log
+        WHERE visited_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY DATE_FORMAT(visited_at, '%Y-%m-%d')
+        ORDER BY date ASC
+    </select>
+
+    <!-- 인기 공방 top5 -->
+    <select id="hotWorkshops" resultType="ChartDTO">
+        SELECT
+            w.workshop_id AS workshopId,
+            w.name AS workshopName,
+            COUNT(v.visit_id) AS visitWorkshopCount,
+            w.average_rating AS workshopAverageRating
+        FROM workshop w
+        JOIN visit_log v ON w.workshop_id = v.workshop_id
+        WHERE v.visited_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        GROUP BY w.workshop_id, w.name, w.average_rating
+        ORDER BY visitWorkshopCount DESC
+        LIMIT 5
+    </select>
+
+    <!-- 최근 회원가입 -->
+    <select id="recentUsers" resultType="User">
+        SELECT
+            user_id,
+            name,
+            email,
+            created_at,
+            role
+        FROM user
+        WHERE active = true
+        ORDER BY created_at DESC
+        LIMIT 5
+    </select>
+
+    <!-- 최근 생성된 공방 -->
+    <select id="recentWorkshops" resultType="Workshop">
+        SELECT
+            workshop_id,
+            name,
+            owner_id,
+            status,
+            approved,
+            created_at
+        FROM workshop
+        ORDER BY created_at DESC
+        LIMIT 5
+    </select>
+</mapper>

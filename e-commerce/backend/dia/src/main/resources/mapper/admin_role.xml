@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.AdminRoleDAO">
+    <select id="findByUserId" parameterType="int" resultType="AdminRole">
+        select
+            admin_role_id as adminRoleId,
+            user_id as userId,
+            role_name as roleName
+        from admin_role
+        where user_id = #{userId}
+    </select>
+
+    <select id="adminList" resultType="AdminRoleDTO">
+        select
+            u.user_id AS userId,
+            u.email,
+            u.password,
+            u.name,
+            u.role,
+            u.phone,
+            u.created_at AS createdAt,
+            ar.admin_role_id AS adminRoleId,
+            ar.role_name AS roleName
+        from user u
+        join admin_role ar on u.user_id = ar.user_id
+        where u.active = true
+    </select>
+
+    <insert id="adminRegister" parameterType="AdminRoleDTO" useGeneratedKeys="true" keyProperty="userId">
+        insert into user(email, password, name, role, phone)
+        values(#{email}, #{password}, #{name}, "ADMIN", #{phone})
+    </insert>
+
+    <insert id="insertAdminRole" parameterType="AdminRoleDTO">
+        insert into admin_role(user_id, role_name)
+        values(#{userId}, #{roleName})
+    </insert>
+
+    <delete id="deleteAdminRole" parameterType="int">
+        delete from admin_role
+        where admin_role_id = #{adminRoleId}
+    </delete>
+
+    <update id="updateAdmin" parameterType="AdminRoleDTO">
+        update user set
+            name = #{name},
+            email = #{email},
+            phone = #{phone}
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateAdminRole" parameterType="AdminRoleDTO">
+        update admin_role set
+            role_name = #{roleName}
+        where user_id = #{userId}
+    </update>
+</mapper>

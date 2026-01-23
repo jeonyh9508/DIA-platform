@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.QnaAdminDAO">
+    <!-- 고객 마이페이지 문의 내역 관리 - 고객 -> 관리자 문의 삭제 -->
+    <delete id="deleteQnaToAdmin" parameterType="int">
+        DELETE FROM qna_admin WHERE qna_admin_id = #{qnaAdminId}
+    </delete>
+
+    <!-- 고객 마이페이지 문의 내역 관리 - 고객 -> 관리자 문의 추가 -->
+    <insert id="insertQnaToAdmin" parameterType="QnaAdmin">
+        INSERT INTO qna_admin (admin_id, user_id, title, content)
+        SELECT ar.user_id AS admin_id, #{userId}, #{title}, #{content}
+        FROM admin_role ar
+        WHERE ar.role_name = 'CS' OR ar.role_name = 'SUPER'
+        ORDER BY ar.user_id ASC
+        LIMIT 1  <!-- 관리자가 여러명이어도 insert는 한 번만 -->
+    </insert>
+
+
+    <!-- 고객 마이페이지 문의 내역 관리 - 고객-> 관리자 문의 수정 -->
+    <update id="updateQnaToAdmin" parameterType="QnaAdmin">
+        UPDATE qna_admin
+        SET title = #{title},
+        content = #{content}
+        WHERE qna_admin_id = #{qnaAdminId}
+    </update>
+
+    <!-- 고객 마이페이지 문의 내역 관리 -->
+    <select id="qnaAdminView" parameterType="int" resultType="QnaAdmin">
+        SELECT * FROM qna_admin WHERE user_id = #{userId}
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- erp 고객 문의 내역 전체 조회 -->
+    <select id="selectAllQnaAdmin" resultType="QnaAdminDTO" parameterType="map">
+        SELECT
+        qa.qna_admin_id AS qnaAdminId,
+        qa.user_id AS userId,
+        qa.admin_id AS adminId,
+        qa.title AS title,
+        qa.content AS content,
+        qa.answer AS answer,
+        qa.status AS status,
+        qa.created_at AS createdAt,
+        qa.answered_at AS answeredAt,
+
+        u.name AS name,
+        u.email AS email,
+        u.role AS role
+        FROM qna_admin qa
+        JOIN user u ON qa.user_id = u.user_id
+        WHERE 1=1
+
+        <!-- 문의자 role 필터 공방주 or 일반 고객-->
+        <if test="role != null and role != ''">
+            AND u.role = #{role}
+        </if>
+
+        <!-- 문의 상태 필터 대기 or 답변완료-->
+        <if test="status != null and status != ''">
+            AND qa.status = #{status}
+        </if>
+
+        <!-- 문의자 이름 검색 -->
+        <if test="keyword != null and keyword != ''">
+            AND (
+            u.name LIKE CONCAT('%', #{keyword}, '%')
+            OR u.email LIKE CONCAT('%', #{keyword}, '%')
+            OR qa.title LIKE CONCAT('%', #{keyword}, '%')
+            OR qa.content LIKE CONCAT('%', #{keyword}, '%')
+            )
+        </if>
+
+
+        <if test="startDate != null and startDate != ''">
+            AND qa.created_at <![CDATA[ >= ]]> #{startDate}
+        </if>
+
+        <if test="endDate != null and endDate != ''">
+            AND qa.created_at <![CDATA[ <= ]]> #{endDate}
+        </if>
+        ORDER BY
+        CASE WHEN qa.status = '대기' THEN 0 ELSE 1 END,
+        qa.created_at DESC
+    </select>
+<!--답변 등록/수정-->
+    <update id="updateQnaToCustomer" parameterType="QnaAdminDTO">
+        UPDATE qna_admin
+        SET
+        answer = #{answer},
+        status = '답변완료',
+        answered_at = NOW()
+        WHERE qna_admin_id = #{qnaAdminId}
+    </update>
+    <!--답변 삭제-->
+    <update id="deleteQnaToCustomer" parameterType="QnaAdminDTO">
+        UPDATE qna_admin
+        SET
+        answer = null,
+        status = '대기',
+        answered_at = null
+        WHERE qna_admin_id = #{qnaAdminId}
+    </update>
+
+    <select id="getUserIdByQnaId" parameterType="int" resultType="int">
+        SELECT user_id
+        FROM qna_admin
+        WHERE qna_admin_id = #{qnaAdminId}
+    </select>
+
+    <select id="findById" parameterType="int" resultType="QnaAdmin">
+        SELECT * FROM qna_admin WHERE qna_admin_id = #{id}
+    </select>
+
+
+
+</mapper>

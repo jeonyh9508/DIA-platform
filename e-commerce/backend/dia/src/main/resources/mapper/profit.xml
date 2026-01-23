@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ProfitDAO">
+
+    <select id="profitAll" resultType="ProfitDTO" parameterType="ProfitDTO">
+        SELECT
+        SUM(pf.total_amount) AS totalAmount,SUM(commission_amt) AS commissionAmt
+        <if test="monthly != null">
+            , pf.monthly
+        </if>
+        FROM workshop w
+        JOIN profit pf USING(workshop_id)
+        <where>
+            w.owner_id = #{ownerId}
+
+            <if test="monthly != null">
+                AND pf.monthly = #{monthly}
+            </if>
+        </where>
+        <if test="monthly != null">
+            GROUP BY pf.monthly
+            ORDER BY pf.monthly
+        </if>
+    </select>
+
+    <select id="profitWorkshop" resultType="ProfitDTO" parameterType="ProfitDTO">
+        SELECT
+        SUM(total_amount) AS totalAmount,
+        SUM(commission_amt) AS commissionAmt
+        <if test="monthly != null or (startMonth != null and endMonth != null)">
+            , monthly
+        </if>
+        FROM profit
+        <where>
+            workshop_id = #{workshopId}
+            <if test="startMonth != null and endMonth != null">
+                AND monthly &gt;= #{startMonth}
+                AND monthly &lt;= #{endMonth}
+            </if>
+            <if test="monthly != null and startMonth == null and endMonth == null">
+                AND monthly = #{monthly}
+            </if>
+        </where>
+        <if test="monthly != null or (startMonth != null and endMonth != null)">
+            GROUP BY monthly
+            ORDER BY monthly
+        </if>
+    </select>
+
+    <select id="profitProgram" resultType="ProfitDTO" parameterType="ProfitDTO">
+        SELECT
+        SUM(total_amount) AS totalAmount,SUM(commission_amt) AS commissionAmt
+        <if test="monthly != null or startMonth != null or endMonth != null">
+            , monthly
+        </if>
+        FROM profit
+        <where>
+            program_id = #{programId}
+            <if test="startMonth != null and endMonth != null">
+                AND monthly &gt;= #{startMonth}
+                AND monthly &lt;= #{endMonth}
+            </if>
+            <if test="monthly != null and startMonth == null and endMonth == null">
+                AND monthly = #{monthly}
+            </if>
+        </where>
+        <if test="monthly != null or startMonth != null or endMonth != null">
+            GROUP BY monthly
+            ORDER BY monthly
+        </if>
+    </select>
+
+
+    <select id="profitGraph" resultType="ProfitDTO" parameterType="ProfitDTO">
+        SELECT
+        SUM(pf.total_amount) AS totalAmount,
+        SUM(pf.commission_amt) AS commissionAmt,
+        p.program_id AS programId,
+        p.title
+        FROM program p
+        LEFT JOIN profit pf ON p.program_id = pf.program_id
+        <where>
+            p.workshop_id = #{workshopId}
+            <if test="monthly != null and monthly != ''">
+                AND pf.monthly = #{monthly}
+            </if>
+        </where>
+        GROUP BY p.program_id, p.title
+        ORDER BY totalAmount DESC
+    </select>
+
+    <insert id="upsertMonthly" parameterType="ProfitDTO">
+        INSERT INTO profit (
+        workshop_id,
+        program_id,
+        monthly,
+        total_amount,
+        paid_status
+        ) VALUES (
+        #{workshopId},
+        #{programId},
+        #{monthly},
+        #{totalPrice},
+        '정산대기'
+        )
+        ON DUPLICATE KEY UPDATE
+        total_amount = total_amount + #{totalPrice};
+    </insert>
+
+    <select id="profitView" parameterType="int" resultType="ProfitDTO">
+        SELECT
+        p.monthly,
+        p.paid_status,
+        SUM(p.total_amount) AS totalAmount,
+        SUM(p.commission_amt) AS commissionAmt,
+        s.final_amount AS finalAmount,
+        s.adjust_amount AS adjustAmount
+        FROM profit p
+        LEFT JOIN (
+        SELECT
+        workshop_id,
+        monthly,
+        final_amount,
+        adjust_amount
+        FROM settlement
+        WHERE adjust_check = TRUE
+        GROUP BY workshop_id, monthly
+        ) s
+        ON p.workshop_id = s.workshop_id
+        AND p.monthly = s.monthly
+        WHERE p.workshop_id = #{workshopId}
+        GROUP BY p.monthly, p.paid_status, s.final_amount, s.adjust_amount
+        ORDER BY p.monthly, p.paid_status
+    </select>
+
+    <select id="profitProgramView" parameterType="ProfitDTO" resultType="ProfitDTO">
+        SELECT
+        profit.monthly,
+        program.title,
+        SUM(profit.total_amount) AS totalAmount,
+        SUM(profit.commission_amt) AS commissionAmt,
+        monthly,
+        paid_status
+        FROM
+        profit
+        JOIN
+        program USING(program_id)
+        WHERE
+        profit.workshop_id = #{workshopId}
+        AND monthly=#{monthly}
+        GROUP BY
+        profit.monthly, program.title ,paid_status
+        ORDER BY
+        profit.monthly, program.title
+    </select>
+
+    <update id="payProfit" parameterType="ProfitDTO">
+        UPDATE profit SET paid_status=#{paidStatus}
+        <if test="paidStatus == '정산완료' or paidStatus == '환불'">
+        ,settled_at = NOW()
+        </if>
+        WHERE workshop_id=#{workshopId} AND monthly = #{monthly}
+    </update>
+
+    <select id="profitSettlement" resultType="ProfitDTO">
+        SELECT
+        p.workshop_id,
+        w.name AS workshopName,
+        u.name AS ownerName,
+        p.monthly,
+        p.paid_status,
+        SUM(p.total_amount) AS totalAmount,
+        SUM(p.commission_amt) AS commissionAmt,
+        MAX(s.final_amount) AS finalAmount
+        FROM profit p
+        LEFT JOIN settlement s ON (p.workshop_id = s.workshop_id AND p.monthly = s.monthly)
+        JOIN workshop w ON p.workshop_id = w.workshop_id
+        JOIN user u ON w.owner_id = u.user_id
+        WHERE p.paid_status = '조정' OR p.paid_status = '정산대기'
+        GROUP BY p.workshop_id, w.name, u.name, p.monthly, p.paid_status
+        ORDER BY p.monthly DESC
+    </select>
+</mapper>

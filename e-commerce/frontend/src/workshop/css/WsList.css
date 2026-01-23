@@ -1,0 +1,244 @@
+/* WsList.css의 기존 스타일을 복사 */
+.ws-content-box {
+  height: 650px;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+.ws-header-line {
+  display: flex;
+  justify-content: space-between;
+}
+.ws-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 250px;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.ws-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ws-empty {
+  text-align: center;
+  padding: 50px;
+  color: #666;
+}
+
+.menu-container {
+  position: relative;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: gray;
+  padding: 0 10px;
+  outline: none;
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  min-width: 130px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 15px;
+  white-space: nowrap;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font: inherit;
+  position: relative;
+}
+
+.dropdown-menu a:last-child,
+.dropdown-menu button:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: #f5f5f5;
+}
+
+.red-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+}
+.ws-pagination-container {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.ws-page-arrow {
+  flex-shrink: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ws-page-arrow:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ws-page-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #f9f9f9;
+  box-shadow: none;
+}
+
+.ws-list {
+  display: grid;
+  flex-direction: unset;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+
+  padding: 0;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.ws-add {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.ws-list-link-add {
+  background-color: #555;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  height: 35px;
+  text-align: center;
+  justify-content: center;
+
+  transition: background-color 0.2s;
+}
+
+.ws-list-link-add:hover {
+  background-color: #333;
+}
+
+.ws-item-details {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ws-item-details span {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.ws-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.ws-pending {
+  color: #aaa;
+  font-style: italic;
+}
+
+.ws-approved {
+  color: #4cae4c;
+}
+.ws-approved .ws-deactivate {
+  color: #dc3545;
+}
+.ws-rejected {
+  color: #dc3545;
+}
+
+.ws-approved {
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.status-normal {
+  color: #4cae4c;
+}
+
+.status-closed {
+  color: #fd7e14;
+}
+
+.status-hidden {
+  color: #6c757d;
+}
+
+.ws-list-link-item {
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 텍스트 색상 상속 (검은색) */
+}
+
+/* 링크 아이템에 마우스를 올렸을 때의 효과 (WsList.css의 .ws-item:hover와 동일하게) */
+.ws-list-link-item:hover .ws-item {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

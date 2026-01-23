@@ -1,0 +1,157 @@
+/* ================================================================= */
+/* 1. WsInfo: 페이지 공통 최상단 헤더 */
+/* "가운데 있어서 딱 이 공방이구나~" 하는 느낌 */
+/* ================================================================= */
+
+.workshop-header {
+  display: flex;
+  flex-direction: column; /* 1. 이미지와 제목을 세로로 쌓습니다. */
+  align-items: center; /* 2. 가로축 중앙 정렬 */
+  justify-content: center; /* 3. 세로축 중앙 정렬 */
+
+  width: 100%;
+  padding: 40px 20px; /* 4. 위아래로 넉넉한 여백을 주어 강조 */
+  margin-bottom: 30px; /* 5. 아래 6:4 콘텐츠와 간격 */
+
+  background-color: #f9f9f9; /* 6. 살짝 다른 배경색으로 영역 구분 */
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 8px; /* 7. 부드러운 모서리 (카드 느낌과 통일) */
+}
+
+/* 어제 주신 150px 이미지 스타일 */
+.ws-profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover; /* 이미지 비율 유지 */
+  margin-bottom: 20px; /* 8. 이미지와 공방 이름 사이 간격 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 9. 이미지에 입체감 */
+  border: 4px solid #fff; /* 10. 흰색 테두리로 강조 */
+}
+
+.workshop-header h2 {
+  font-size: 26px; /* 11. 공방 이름을 크고 굵게 */
+  font-weight: 600;
+  color: #333;
+  margin: 0; /* 기본 마진 제거 */
+}
+
+/* ================================================================= */
+/* 3. WsInfo: 페이지 분할 (6:4 레이아웃) - 어제 주신 코드 */
+/* ================================================================= */
+
+.main-content-split {
+  display: flex;
+  gap: 30px;
+  flex-grow: 1;
+}
+
+/* 1. 좌측 영역 (60%) */
+.detail-info {
+  flex: 0 0 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 2. 우측 영역 (40%) */
+.side-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 좌/우측 공통 카드 (틀) */
+.side-card {
+  padding: 20px;
+  margin-bottom: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.section-title,
+.side-card h3 {
+  font-size: 1.2em;
+  color: #444;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-top: 12px;
+  margin-bottom: 15px;
+}
+.side-content .side-card {
+  flex-grow: 1;
+}
+.back-link {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  display: block;
+  width: fit-content;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+  background-color: #f0f0f0;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.back-link:hover {
+  background-color: #e0e0e0;
+  color: #111;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.profit-log {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+}
+
+.profit-log h3 {
+  font-size: 1.2em;
+  color: #444;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-top: 12px;
+  margin-bottom: 15px;
+}
+
+.description-container {
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.description-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-wrap; /* 줄바꿈 적용 */
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1; /* 기본 한 줄 */
+}
+
+.description-container.expanded .description-text {
+  -webkit-line-clamp: unset; /* 전체 보기 */
+  overflow: visible;
+}
+
+.toggle-text {
+  color: #333;
+  font-weight: bold;
+  margin-left: 5px;
+  user-select: none;
+}

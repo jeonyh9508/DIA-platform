@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.SettlementDAO">
+
+    <insert id="insertSettlement" parameterType="ProfitDTO">
+        INSERT INTO settlement (
+            workshop_id,
+            monthly,
+            origin_commission,
+            adjust_amount,
+            bill_date,
+            status
+            )
+        SELECT
+            p.workshop_id,
+            p.monthly,
+            SUM(p.commission_amt),
+            <choose>
+            <when test="finalAmount != null and finalAmount != 0">
+                #{adjustAmount}
+            </when>
+            <otherwise>
+                0
+            </otherwise>
+            </choose>,
+            NOW(),
+            '정산중'
+        FROM profit p
+        WHERE p.workshop_id = #{workshopId}
+        AND p.monthly = #{monthly}
+        GROUP BY p.workshop_id, p.monthly
+    </insert>
+    <select id="selectOne" resultType="Settlement" >
+        SELECT * FROM settlement WHERE settlement_id = #{settlementId}
+    </select>
+
+    <select id="selectAll" resultType="SettlementDTO" parameterType="SettlementDTO">
+        SELECT
+        s.settlement_id,
+        s.workshop_id,
+        s.monthly,
+        s.origin_commission,
+        s.adjust_amount,
+        s.final_amount,
+        s.status,
+        s.bill_date,
+        s.paid_date,
+        s.admin_checker_id,
+        w.name AS workshopName,
+        w.owner_id AS ownerId,
+        u.name AS ownerName,
+        au.name AS adminName
+        FROM settlement s
+        JOIN workshop w USING (workshop_id)
+        JOIN user u ON w.owner_id = u.user_id
+        LEFT JOIN user au ON s.admin_checker_id = au.user_id
+        <where>
+            1=1
+            <if test="status != null and status != ''">
+                AND s.status = #{status}
+            </if>
+        </where>
+        GROUP BY s.settlement_id
+        ORDER BY s.bill_date DESC;
+    </select>
+
+    <update id="statusUpdate" parameterType="SettlementDTO">
+        UPDATE settlement
+        SET status = #{status},
+        admin_checker_id = #{adminCheckerId}
+        <if test="status == '환불'">
+            , adjust_amount = -origin_commission
+            , paid_date = NOW()
+        </if>
+        <if test="status == '정산완료'">
+            , paid_date = NOW()
+        </if>
+        WHERE settlement_id = #{settlementId}
+    </update>
+
+    <update id="adjustSettlement" parameterType="SettlementDTO">
+        UPDATE settlement SET adjust_amount = #{adjustAmount}, status = #{status}, admin_checker_id = #{adminCheckerId}, adjust_check = true
+        WHERE settlement_id = #{settlementId} AND adjust_check = false
+    </update>
+
+    <select id="settlementChart" resultType="SettlementDTO">
+        SELECT monthly,
+            SUM(CASE
+            WHEN status = '정산완료'
+            THEN final_amount
+            ELSE 0
+            END) AS approvedAmount,
+            SUM(CASE
+            WHEN status = '환불'
+            THEN adjust_amount
+            ELSE 0
+            END) AS refundAmount
+        FROM settlement
+        GROUP BY monthly
+        ORDER BY monthly
+    </select>
+</mapper>

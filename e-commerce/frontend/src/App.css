@@ -1,0 +1,60 @@
+.Toastify__toast-container {
+  position: fixed !important;
+  left: 50% !important;
+  transform: translateX(32%) !important;
+  z-index: 2147483647 !important;
+  
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  
+  width: auto !important;
+}
+
+@font-face {
+  font-family: "GyeonggiMillenniumTitle";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Title_Light.woff")
+    format("woff");
+  font-weight: 300;
+  font-display: swap;
+}
+
+.Toastify__toast {
+  background-color: #fafafa;
+  color: #333;
+  border-radius: 8px;
+  font-family: "GyeonggiMillenniumTitle";
+  padding: 20px 25px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.Toastify__toast--success {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+  border: 1px solid #1e8e3e;
+}
+
+.Toastify__toast--error {
+  background-color: #fce8e6;
+  color: #d93025;
+  border: 1px solid #d93025;
+}
+
+/* 진행바 색상 */
+.Toastify__progress-bar--success {
+  background-color: #1e8e3e;
+}
+
+.Toastify__progress-bar--error {
+  background-color: #d93025;
+}
+
+/* 아이콘 색상 변경 */
+.Toastify__toast--success svg {
+  fill: #1e8e3e;
+}
+.Toastify__toast--error svg {
+  fill: #d93025;
+}

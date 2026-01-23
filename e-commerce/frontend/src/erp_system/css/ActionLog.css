@@ -1,0 +1,261 @@
+/* 1. 페이지 레이아웃 (스크롤 방지 및 꽉 채우기) */
+.erp-log-page {
+  width: 100%;
+  height: calc(100vh - 60px); /* 헤더 제외 높이 */
+  display: flex;
+  justify-content: center;
+  background-color: #f4f6f8;
+  padding: 20px;
+  font-family: "Pretendard", sans-serif;
+  color: #222;
+  box-sizing: border-box;
+}
+
+/* 2. 내부 컨테이너 */
+.erp-log-container {
+  width: 100%;
+  max-width: 1500px;
+  min-width: 1500px; /* 고정 너비 */
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* 세로 배치 */
+}
+
+/* 타이틀 */
+.erp-log-title {
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: #111;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0; /* 높이 고정 */
+}
+
+/* 3. 컨트롤 영역 (필터 + 검색) */
+.erp-log-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.erp-log-filter {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.erp-log-filter label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.erp-log-filter label:hover {
+  color: #111;
+}
+
+.erp-log-filter input[type="radio"] {
+  margin-right: 6px;
+  accent-color: #4a4a4a;
+  cursor: pointer;
+}
+
+.erp-log-search {
+  display: flex;
+  gap: 5px;
+}
+
+.erp-log-search input {
+  width: 250px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "Pretendard", sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.erp-log-search input:focus {
+  border-color: #4a4a4a;
+}
+
+.erp-log-search button {
+  padding: 8px 16px;
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.erp-log-search button:hover {
+  background-color: #333;
+}
+
+.erp-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.erp-log-table th,
+.erp-log-table td {
+  text-align: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  word-break: keep-all;
+  vertical-align: middle;
+}
+
+/* 헤더 스타일 (진한 회색) */
+.erp-log-table th {
+  background-color: #666; /* 진한 회색 */
+  color: #fff; /* 흰색 글씨 */
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* 컬럼 폭 */
+.erp-log-table th:nth-child(1) {
+  width: 8%;
+} /* NO */
+.erp-log-table th:nth-child(2) {
+  width: 12%;
+} /* 유형 */
+.erp-log-table th:nth-child(3) {
+  width: 20%;
+} /* 대상 */
+.erp-log-table th:nth-child(4) {
+  width: 10%;
+} /* 처리 */
+.erp-log-table th:nth-child(5) {
+  width: 10%;
+} /* 책임자 */
+.erp-log-table th:nth-child(6) {
+  width: 20%;
+} /* 일시 */
+
+.erp-log-table-row:hover {
+  background-color: #fafafa;
+}
+
+/* 5. 페이지네이션 (하단 고정) */
+.erp-log-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.erp-log-pagination button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #555;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.erp-log-pagination button:hover:not(:disabled) {
+  background-color: #eee;
+  border-color: #ccc;
+}
+
+.erp-log-pagination button.active {
+  background-color: #4a4a4a;
+  color: #fff;
+  border-color: #4a4a4a;
+  font-weight: 700;
+}
+
+.erp-log-pagination button:disabled {
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+  border-color: #eee;
+}
+
+/* 기타 유틸 스타일 */
+.erp-log-td.clickable {
+  cursor: pointer;
+  font-weight: 600;
+  color: #4a4a4a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.erp-log-td.clickable:hover {
+  color: #000;
+}
+
+.reason-row {
+  background-color: #fafafa;
+  border-bottom: 2px solid #eee;
+}
+
+.log-reason-content {
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin: 5px 10px;
+  white-space: "pre-line";
+}
+
+.erp-log-check-btn {
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #4a4a4a;
+  color: #4a4a4a;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.erp-log-check-btn:hover {
+  background-color: #4a4a4a;
+  color: #fff;
+}
+
+.erp-log-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.erp-log-empty-message {
+  text-align: center;
+  padding: 40px 0;
+  color: #888;
+}

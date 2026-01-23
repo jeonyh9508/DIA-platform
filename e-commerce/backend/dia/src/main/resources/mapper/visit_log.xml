@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.VisitLogDAO">
+    <insert id="insertLog" parameterType="Integer">
+        insert into visit_log(
+            user_id,
+            workshop_id,
+            program_id,
+            visited_at
+        ) values (
+            #{userId},
+            #{workshopId},
+            #{programId},
+            NOW()
+        )
+    </insert>
+
+    <select id="allLog" resultType="VisitLog">
+        select * from visit_log
+    </select>
+</mapper>

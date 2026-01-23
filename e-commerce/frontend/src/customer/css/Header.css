@@ -1,0 +1,367 @@
+.Toastify__toast {
+  top: 50px;
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 2147483646 !important; /* 가능한 큰 값 + !important로 강제 */
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+@font-face {
+  font-family: "Rebecca";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+.header-title {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: #333;
+  margin-right: 20px;
+  font-family: "Rebecca";
+}
+.header-title img {
+  height: 60px;
+}
+.user-nav {
+  margin-right: 20px;
+}
+
+.user-nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.user-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon-button {
+  font-size: 1.5em; /* 아이콘 크기 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  text-decoration: none;
+}
+
+/* SearchBar Styles */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 5px 10px;
+  position: relative; /* z-index 적용 위해 필요 */
+  z-index: 2147483647 !important; /* .main-header보다 크게 */
+  height: 36px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 0.9em;
+}
+.search-bar-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 0.9em;
+  width: 350px;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #555;
+}
+
+.fi-rr-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === 추천 공방 섹션 (추가된 부분) === */
+.workshop-recommend-section {
+  margin-bottom: 50px;
+}
+
+.workshop-list {
+  display: flex;
+  gap: 30px;
+  justify-content: space-around; /* 아이템들을 균등하게 배치 */
+  overflow-x: auto;
+}
+
+.workshop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.workshop-logo-placeholder {
+  /* IMG: 여기에 공방 로고 이미지가 들어갑니다. */
+  width: 100px;
+  height: 100px;
+  background-color: #e9e9e9;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.workshop-item:hover .workshop-logo-placeholder {
+  transform: scale(1.05); /* 마우스 올렸을 때 약간 커지는 효과 */
+}
+
+.workshop-name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.workshop-tags {
+  display: flex;
+  gap: 5px;
+}
+
+.workshop-tag {
+  background-color: #f2f2f2;
+  color: #555;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.8em;
+}
+
+/* === 공통 더보기 링크 스타일 === */
+.more-link {
+  text-decoration: none;
+  color: #888;
+  font-size: 0.9em;
+}
+
+.search-detail {
+  position: absolute;
+  top: 60px; /* 헤더 바로 아래 */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* === 새로 추가: 올라가면서 사라지는 애니메이션 === */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.search-detail.open {
+  animation: fadeDown 0.25s ease-in-out forwards;
+}
+
+.search-detail.close {
+  animation: fadeUp 0.25s ease-in-out forwards;
+}
+
+.search-detail-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 60px auto 5px auto;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.search-detail-container table th {
+  width: 15%;
+  height: 60px;
+  text-align: left;
+}
+
+.search-detail-container table td {
+  width: 35%;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.search-detail-container select {
+  width: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-detail-container input[type="number"] {
+  width: 80px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button-field {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.lebel-button-field {
+  display: flex;
+  gap: 10px;
+}
+
+.search-field-close {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.apply-button {
+  width: 10%;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  box-shadow: 0px 1px 1px 1px #666;
+  font-weight: bold;
+}
+
+/* 닫기, 초기화, 난이도 버튼 */
+.close-button,
+.reset-button {
+  width: 10%;
+  padding: 10px;
+  background-color: white;
+  color: 333;
+  border: 1px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.level-button {
+  width: 80px;
+  padding: 10px;
+  background-color: white;
+  color: 333;
+  border: 1px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.level-button.selected {
+  background-color: #333;
+  color: white;
+}
+
+.close-button:hover,
+.reset-button:hover,
+.level-button:hover {
+  box-shadow: 0px 1px 1px 1px #777;
+  font-weight: bold;
+}
+
+.topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  z-index: 1001;
+}
+
+.overlay {
+  position: fixed;
+  top: 446px; /* 헤더 높이 만큼 내려줌 */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 60px); /* 헤더 영역 제외 */
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999; /* 헤더 아래, 상세 검색창 위 */
+}
+
+/* 상세 검색창이 overlay 위에 있도록 z-index 재조정(필요 시) */
+.search-detail {
+  position: absolute;
+  top: 60px; /* 헤더 바로 아래 */
+  width: 100%;
+  z-index: 1000; /* overlay보다 위 */
+}
+@import url("https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css");

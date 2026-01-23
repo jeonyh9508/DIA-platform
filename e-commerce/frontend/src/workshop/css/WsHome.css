@@ -1,0 +1,67 @@
+.ws-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 700;
+}
+
+.ws-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ws-title-header .ws-view-button {
+  width: 100px;
+  height: 40px;
+}
+
+.ws-tab {
+  display: flex;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+}
+
+.ws-button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #777;
+  transition: all 0.3s;
+  margin-bottom: -2px;
+}
+
+.ws-button.active {
+  color: #333;
+  border-bottom: 2px solid #333;
+  font-weight: bold;
+}
+
+.ws-main {
+  padding: 0 10px;
+}
+.ws-content {
+  display: block;
+}
+
+.ws-qna-admin-btn {
+  position: fixed;
+  right: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  bottom: 50px;
+}
+.ws-qna-admin-btn img {
+  position: fixed;
+  right: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  bottom: 50px;
+}
+.ws-qna-admin-btn img:hover {
+  cursor: pointer;
+}

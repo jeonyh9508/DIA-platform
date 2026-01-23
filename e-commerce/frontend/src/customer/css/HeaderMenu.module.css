@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+.logInOutBtn {
+  background: #fff;
+  border: 1.5px solid #777;
+  color: #666666;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 7px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logInOutBtn:hover {
+  background-color: #e7e7e7;
+  color: #707070;
+}
+
+.logInOutBtn:active {
+  background-color: #acacac;
+  color: #585858;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 10px;
+}
+
+.icon {
+  width: 40px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}

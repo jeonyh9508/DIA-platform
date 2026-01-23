@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.WorkshopDAO">
+    <resultMap id="workshopMap" type="WorkshopDTO">
+        <id property="workshopId" column="workshop_id"/>
+        <result property="ownerId" column="owner_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="profileImg" column="profile_img"/>
+        <result property="address" column="address"/>
+        <result property="contactNumber" column="contact_number"/>
+        <result property="status" column="status"/>
+        <result property="approved" column="approved"/>
+        <result property="averageRating" column="average_rating"/>
+        <result property="active" column="active"/>
+        <result property="createdAt" column="created_at"/>
+        <collection property="program" ofType="Program">
+            <id property="programId" column="program_id"/>
+            <result property="workshopId" column="workshop_id"/>
+            <result property="title" column="title"/>
+            <result property="description" column="description"/>
+            <result property="category" column="category"/>
+            <result property="price" column="price"/>
+            <result property="capacity" column="capacity"/>
+            <result property="durationMin" column="duration_min"/>
+            <result property="difficulty" column="difficulty"/>
+            <result property="thumb" column="thumb"/>
+            <result property="folder" column="folder"/>
+            <result property="status" column="status"/>
+            <result property="approved" column="approved"/>
+            <result property="scheduleType" column="schedule_type"/>
+            <result property="periodStart" column="period_start"/>
+            <result property="periodEnd" column="period_end"/>
+            <result property="active" column="active"/>
+            <result property="createdAt" column="created_at"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAll" resultType="Workshop">
+        SELECT * FROM workshop WHERE active = true AND status='정상'
+    </select>
+
+    <select id="selectOne" resultType="Workshop" parameterType="int">
+        SELECT * FROM workshop WHERE workshop_id = #{workshopId}
+    </select>
+
+    <select id="selectWorkshop" resultMap="workshopMap" parameterType="int">
+        SELECT * FROM workshop
+        JOIN program USING(workshop_id)
+        WHERE program_id = #{programId}
+    </select>
+
+    <select id="selectWorkshopInfo" resultType="WorkshopDTO" parameterType="int">
+        SELECT * FROM workshop WHERE workshop_id = #{workshopId}
+    </select>
+
+    <select id="selectMW" resultType="Workshop">
+        SELECT * FROM workshop WHERE owner_id= #{ownerId}
+    </select>
+
+    <select id="selectMWP" parameterType="WorkshopDTO" resultMap="workshopMap">
+        SELECT
+        w.workshop_id,
+        p.program_id,
+        p.title,
+        p.description,
+        p.price,
+        p.category,
+        p.active,
+        p.approved,
+        p.thumb
+        FROM workshop w
+        JOIN program p USING (workshop_id)
+        WHERE w.workshop_id = #{workshopId}
+        AND w.owner_id = #{ownerId}
+    </select>
+
+    <insert id="workshopAdd" parameterType="Workshop" useGeneratedKeys="true" keyProperty="workshopId">
+        INSERT INTO workshop (owner_id, name, description,profile_img, address, contact_number) VALUES (
+        #{ownerId}, #{name}, #{description}, #{profileImg}, #{address}, #{contactNumber})
+    </insert>
+
+    <update id="workshopProfile" parameterType="Workshop">
+        UPDATE workshop
+        SET profile_img = #{profileImg}
+        WHERE workshop_id = #{workshopId}
+    </update>
+
+    <update id="workshopModify" parameterType="Workshop">
+        UPDATE workshop
+        SET
+        description = #{description},
+        contact_number = #{contactNumber},
+        status = #{status},
+        created_at = NOW()
+        WHERE workshop_id = #{workshopId}
+        AND owner_id = #{ownerId}
+    </update>
+
+    <update id="workshopDel" parameterType="Workshop">
+        UPDATE workshop
+        SET
+        active = #{active}
+        WHERE workshop_id = #{workshopId}
+        AND owner_id = #{ownerId}
+    </update>
+
+    <update id="updateWorkshopApproved" parameterType="ApprovalDTO">
+        UPDATE workshop
+        SET approved = #{approved},
+            active = #{active}
+        WHERE workshop_id = #{targetId}
+    </update>
+
+    <select id="selectWorkshopList" parameterType="SearchDTO" resultType="WorkshopDTO">
+        SELECT
+            w.workshop_id,
+            w.owner_id,
+            w.name,
+            w.status,
+            w.approved,
+            w.active,
+            w.created_at,
+            u.user_id,
+            u.name AS user_name,
+            u.email
+        FROM workshop w
+            LEFT JOIN user u ON w.owner_id = u.user_id
+
+        WHERE 1=1
+        <if test="filter != null and filter != 'ALL'">
+            AND approved = #{filter}
+        </if>
+
+        <if test="keyword != null and keyword != ''">
+            AND (w.name LIKE CONCAT('%', #{keyword}, '%')
+            OR u.name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+
+        ORDER BY
+        <choose>
+            <when test="sortBy != null">
+                ${sortBy} ${sortDir}
+            </when>
+            <otherwise>
+                w.created_at DESC
+            </otherwise>
+        </choose>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countWorkshopList" parameterType="SearchDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM workshop w
+            LEFT JOIN user u ON w.owner_id = u.user_id
+        WHERE 1=1
+        <if test="filter != null and filter != 'ALL'">
+            AND approved = #{filter}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (w.name LIKE CONCAT('%', #{keyword}, '%')
+            OR u.name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <select id="selectWorkshopDetail" parameterType="int" resultType="WorkshopDTO">
+        SELECT
+            w.workshop_id,
+            w.owner_id,
+            w.name,
+            w.description,
+            w.profile_img,
+            w.address,
+            w.contact_number,
+            w.status,
+            w.approved,
+            w.active,
+            w.created_at,
+            u.user_id,
+            u.name AS user_name,
+            u.email
+        FROM workshop w
+            LEFT JOIN user u ON w.owner_id = u.user_id
+        WHERE workshop_id = #{workshopId}
+    </select>
+
+    <select id="workshopReject" parameterType="int" resultType="WorkshopDTO">
+        SELECT w.workshop_id, w.name, w.approved, a.reason, a.created_at AS logCreatedAt FROM workshop w
+        JOIN action_log a ON w.workshop_id = a.target_id AND a.target_type = 'WORKSHOP'
+        WHERE w.approved = '거절' AND w.workshop_id = #{workshopId}
+        ORDER BY a.created_at DESC
+        LIMIT 1
+    </select>
+</mapper>

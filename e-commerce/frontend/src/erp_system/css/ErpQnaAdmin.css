@@ -1,0 +1,282 @@
+/* ========== 전체 컨테이너 ========== */
+.erp-main-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+  font-family: "Pretendard", sans-serif;
+  color: #222;
+}
+
+.erp-main-container h2 {
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  color: #111;
+  border-bottom: 1px solid #eee;
+}
+
+/* ========== 검색 필터 박스 ========== */
+.erp-qna-filter-section {
+  border-bottom: 1px solid #eee;
+}
+
+.erp-qna-filters {
+  display: flex;
+  margin: 0;
+}
+
+.erp-qna-filters table {
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.erp-qna-filters th {
+  padding: 0 20px;
+  text-align: left;
+}
+.erp-qna-filters td {
+  padding-right: 10px;
+}
+
+.erp-qna-filters select,
+.erp-qna-filters input {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  background: #fff;
+  transition: border 0.2s ease;
+  font-family: inherit;
+  flex: 1;
+}
+.erp-qna-filters input[type="text"] {
+  width: 100%;
+}
+
+.erp-qna-filters select:focus,
+.erp-qna-filters input:focus {
+  border-color: #888;
+}
+
+.erp-qna-filters button {
+  padding: 8px 15px;
+  background: #222;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: 0.25s;
+}
+
+.erp-qna-filters button:hover {
+  background: #444;
+}
+
+/* ========== QNA 카드 리스트 ========== */
+.erp-qna-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ========== 개별 QNA 카드 ========== */
+.erp-qna-item {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* 카드 그림자 */
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.erp-qna-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ========== 카드 헤더 ========== */
+.erp-qna-header {
+  padding: 18px 20px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.erp-qna-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* 작성자 + 역할 + 상태 + 날짜 */
+.erp-qna-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #666;
+}
+.qna-name {
+  font-weight: 600;
+  color: #666;
+}
+
+.qna-role {
+  background: #ececec;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* 상태 뱃지 */
+.erp-qna-status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.erp-qna-status.waiting {
+  color: #8a6d00;
+  background: #fff6d1;
+}
+
+.erp-qna-status.done {
+  color: #1a6d28;
+  background: #d8f4d9;
+}
+
+.qna-date {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  font-size: 12px;
+  color: #999;
+}
+
+/* ========== 카드 상세 (펼침) ========== */
+.erp-qna-detail {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  background: #fff;
+  border-top: 1px solid #eee;
+
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.3s ease;
+}
+
+.erp-qna-detail.open {
+  max-height: 500px;
+  opacity: 1;
+  padding: 20px;
+}
+
+/* 상세 내용 블록 */
+.detail-block {
+  margin-bottom: 20px;
+}
+
+.detail-block strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #222;
+  font-size: 15px;
+}
+
+.detail-block p {
+  color: #444;
+  line-height: 1.6;
+  font-size: 14px;
+  white-space: pre-wrap; /* 공백, 줄바꿈 유지 */
+}
+
+/* 조회된 내용 없음 */
+.empty {
+  text-align: center;
+  padding: 40px;
+  font-size: 15px;
+  color: #888;
+}
+
+.qna-actions-input {
+  padding: 8px 8px;
+  font-size: 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  background: #fff;
+  transition: border 0.2s ease;
+  width: 100%;
+  min-height: 90px;
+  font-family: inherit;
+  resize: vertical;
+}
+.qna-answers {
+  display: flex;
+  flex-direction: row;
+}
+.answer-button-area {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+@import url("https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-chubby/css/uicons-thin-chubby.css");
+
+.filter-button {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  gap: 10px; /* 버튼 간격 */
+  margin-top: 10px; /* 위 여백 (옵션) */
+  margin-bottom: 15px;
+}
+.count-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+.status-board {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.content-count-waiting,
+.content-count-answered {
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+.content-count-waiting {
+  color: #8a6d00;
+  background-color: #fff6d1;
+}
+.content-count-answered {
+  color: #156c15;
+  background-color: #bde3c380;
+}
+.radio-item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.radio-item input[type="radio"] {
+  margin-right: 5px;
+  accent-color: #4a4a4a;
+  cursor: pointer;
+}

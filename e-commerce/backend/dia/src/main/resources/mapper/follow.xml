@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.FollowDAO">
+
+    <resultMap id="followMap" type="com.project.dia.model.dto.FollowDTO">
+        <id property="followId" column="follow_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="active" column="active"/>
+        <result property="workshopId" column="workshop_id"/>
+        <result property="profileImg" column="profile_img"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="selectFollow" parameterType="int" resultMap="followMap">
+        SELECT
+        f.follow_id,
+        f.user_id,
+        f.workshop_id,
+        f.active,
+        w.profile_img,
+        w.name
+        FROM follow f
+        LEFT JOIN workshop w
+        ON f.workshop_id = w.workshop_id
+        WHERE user_id = #{userId} AND f.active = TRUE
+    </select>
+
+    <select id="followList" parameterType="int" resultType="FollowDTO">
+        SELECT
+        f.follow_id, u.name, f.created_at, f.active, u.user_id,
+        (SELECT
+        SUM(active)
+        FROM follow WHERE workshop_id = #{workshopId}
+        ) AS totalFollow
+        FROM follow f
+        JOIN user u ON f.user_id = u.user_id
+        WHERE f.workshop_id = #{workshopId}
+        AND f.active = TRUE
+    </select>
+
+    <select id="selectTotalFollows" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM follow
+        WHERE workshop_id = #{workshopId} AND active = TRUE
+    </select>
+
+    <select id="selectOne" resultType="Follow" parameterType="Follow">
+        SELECT * FROM follow
+        WHERE user_id = #{userId} AND workshop_id = #{workshopId}
+    </select>
+
+    <insert id="insertFollow" parameterType="Follow">
+        INSERT INTO follow(user_id, workshop_id) VALUES(#{userId}, #{workshopId})
+    </insert>
+
+    <update id="updateFollow" parameterType="Follow">
+        UPDATE follow
+        SET active = #{active}, updated_at = NOW()
+        WHERE follow_id = #{followId}
+    </update>
+
+    <select id="selectFollowedWorkshopIds" parameterType="int" resultType="int">
+        SELECT workshop_id
+        FROM follow
+        WHERE user_id = #{userId}
+        AND active = 1
+    </select>
+
+    <select id="workshopTag" resultType="map">
+        SELECT
+        w.workshop_id AS workshopId,
+        GROUP_CONCAT(DISTINCT p.category ORDER BY p.category SEPARATOR ',') AS categories
+        FROM workshop w
+        JOIN program p USING (workshop_id)
+        GROUP BY w.workshop_id;
+    </select>
+
+</mapper>

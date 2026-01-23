@@ -1,0 +1,327 @@
+/* =========================================================
+   공통 컨테이너
+========================================================= */
+.erp-main-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+  font-family: "Pretendard", sans-serif;
+  color: #222;
+}
+
+.erp-main-container h2 {
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #111;
+  border-bottom: 1px solid #eee;
+}
+
+/* =========================================================
+   공통 버튼 스타일
+========================================================= */
+.banner-add-btn,
+.banner-preview-btn {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  border: none;
+}
+
+.banner-add-btn {
+  background-color: #222;
+  color: #fff;
+}
+.banner-add-btn:hover {
+  opacity: 0.9;
+}
+
+.banner-preview-btn {
+  background-color: #fff;
+  color: #222;
+  border: 1px solid #222;
+}
+.banner-preview-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* =========================================================
+   테이블
+========================================================= */
+.banner-table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 헤더 */
+.banner-header {
+  display: grid;
+  grid-template-columns: 70px 150px 1fr 1fr 70px 70px 70px;
+  background-color: #fff;
+  padding: 12px 0;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 행 */
+.banner-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 150px 1fr 70px 70px 70px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+  background: #fff;
+}
+.banner-row:last-child {
+  border-bottom: none;
+}
+
+.banner-row.dragging {
+  background-color: #eaf4ff;
+  border: 1px solid #4a8f5c;
+}
+
+/* 셀 */
+.banner-cell {
+  padding: 0 10px;
+  font-size: 14px;
+  color: #333;
+}
+.banner-cell span {
+  cursor: pointer;
+}
+
+/* 이미지 */
+.img-col img {
+  width: 100%;
+  aspect-ratio: 3.5/1;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* 드래그 핸들 */
+.handle {
+  cursor: grab;
+  font-size: 20px;
+  text-align: center;
+}
+.handle:active {
+  cursor: grabbing;
+}
+
+/* =========================================================
+   테이블 상단
+========================================================= */
+.banner-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.banner-top-row-right {
+  display: flex;
+}
+
+.save-status {
+  padding: 0 14px 14px 0;
+  color: #555;
+  font-size: 14px;
+}
+.save-status span {
+  animation: fadein 0.3s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 목록 영역 */
+.banner-body {
+  min-height: 50px;
+}
+
+/* =========================================================
+   테이블 내부 버튼
+========================================================= */
+.banner-edit-btn,
+.banner-delete-btn {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.banner-edit-btn {
+  background-color: #e6e6e6;
+}
+.banner-edit-btn:hover {
+  background-color: #d3d3d3;
+}
+
+.banner-delete-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+.banner-delete-btn:hover {
+  background-color: #d73838;
+}
+
+/* =========================================================
+   모달 공통 스타일
+========================================================= */
+.banner-banner-modal,
+.banner-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-banner-modal {
+  z-index: 500;
+}
+.banner-preview-modal {
+  z-index: 5000;
+}
+
+/* 모달 컨텐츠 공통 */
+.banner-modal-content,
+.banner-preview-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 등록 모달 */
+.banner-modal-content {
+  width: 500px;
+}
+
+.banner-modal-content h3 {
+  margin-bottom: 15px;
+}
+
+.banner-modal-content label {
+  display: block;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.banner-modal-content input[type="text"],
+.banner-modal-content input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.banner-checkbox-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.banner-checkbox-row input[type="checkbox"] {
+  accent-color: #333;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.banner-modal-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.banner-modal-btns button {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.banner-save-btn {
+  background-color: #222;
+  color: #fff;
+}
+.banner-save-btn:hover {
+  background-color: #444;
+}
+
+/* 드래그 영역 */
+.drag-area {
+  width: 100%;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: #fafafa;
+  margin-bottom: 16px;
+}
+.drag-area input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+/* 미리보기 이미지 */
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* 미리보기 모달 */
+.banner-preview-content {
+  width: 80%;
+  max-width: 1200px;
+  padding-bottom: 80px;
+  border-radius: 12px;
+  position: relative;
+}
+
+/* 미리보기 닫기 버튼 */
+.banner-preview-close {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 20px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.banner-preview-close:hover {
+  opacity: 0.9;
+}
+
+/* 아이콘 */
+@import url("https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css");

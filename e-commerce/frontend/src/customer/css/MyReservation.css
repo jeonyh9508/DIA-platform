@@ -1,0 +1,306 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.reservation-nav {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1px;
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+  padding: 0 5px;
+}
+
+.reservation-nav [class^="navi"] {
+  font-weight: bold;
+  height: 100%;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.reservation-nav {
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.reservation-nav span {
+  padding: 10px 0;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  color: #666;
+}
+
+.reservation-nav span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 3px;
+  background-color: #222;
+  transition: width 0.2s ease;
+}
+
+.reservation-nav span:hover::after {
+  width: 100%;
+}
+
+.reservation-nav span.active {
+  color: #222;
+}
+
+.reservation-nav span.active::after {
+  width: 100%;
+}
+
+.status-filter-box {
+  display: flex;
+  gap: 14px;
+  margin: 20px 0 0 20px;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+.status-filter-box label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.status-filter-box input[type="checkbox"] {
+  accent-color: #222;
+  cursor: pointer;
+}
+
+.reservation-card {
+  padding: 20px 20px 30px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.reservation-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.detail-btn {
+  background-color: #f9f9f9;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.detail-btn:hover {
+  background-color: #ececec;
+  border-color: #cfcfcf;
+  color: #333;
+}
+
+.reservation-card-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.reservation-card-content .program-thumb {
+  width: 250px;
+  height: 200px;
+}
+
+.program-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.reservation-btn-set {
+  display: flex;
+  gap: 20px;
+}
+
+.reservation-buttons {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #ffffff;
+  color: #333333;
+  cursor: pointer;
+}
+
+.reservation-buttons:hover:not(:disabled) {
+  background-color: #333;
+  border-color: #c7c7c7;
+  color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.reservation-buttons:disabled {
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #888;
+  cursor: default;
+}
+
+.review-add-container .review-add-form {
+  width: 480px;
+  margin: 15px 0 0 0;
+  padding: 0 15px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-add-container .review-form-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  padding: 15px;
+  letter-spacing: -0.5px;
+}
+
+.review-add-rating {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+  color: #ffb400;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 18px;
+}
+
+.review-add-rating:hover {
+  background-color: #fff;
+  border-color: #ffb400;
+}
+
+.review-add-rating:focus {
+  border-color: black;
+  background-color: #fff;
+}
+
+.review-add-rating option {
+  color: #ffb400;
+  background: #fff;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.review-add-form-group {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.review-add-form-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.review-add-form-left .add-btn {
+  width: 150px;
+  height: 150px;
+}
+.review-add-form-left .preview-item {
+  width: 150px;
+  height: 150px;
+}
+.review-add-form-right {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.review-add-form textarea {
+  width: 100%;
+  min-height: 120px;
+  margin: 20px 0 0 0;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  resize: none; /* 크기 수정 불가 */
+  overflow-y: auto; /* 내용 많아질 때 스크롤 */
+}
+
+.review-add-form textarea:focus {
+  background-color: #fff;
+  border-color: black;
+}
+
+.review-add-container .submit-btn {
+  margin-bottom: 15px;
+}
+
+.qna-add-container {
+  width: 480px;
+  margin: 15px 0 0 0;
+  padding: 0 15px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.qna-add-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  padding: 15px;
+  letter-spacing: -0.5px;
+}
+
+.qna-add-container textarea {
+  height: 180px;
+}
+
+.qna-add-container .submit-btn {
+  margin-top: 10px;
+}

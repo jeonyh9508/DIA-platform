@@ -1,0 +1,128 @@
+.ws-follow-wish-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ws-fw-section {
+  width: 100%;
+}
+
+.ws-fw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ws-fw-title {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ws-fw-divider {
+  display: none;
+}
+
+.ws-message-send {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #555;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.ws-message-send:hover {
+  background-color: #333;
+}
+
+.ws-fw-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ws-fw-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 5px;
+  font-size: 15px;
+  color: #555;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ws-fw-list-item:last-child {
+  border-bottom: none;
+}
+
+.ws-fw-list-item .ws-date {
+  font-size: 14px;
+  color: #888;
+}
+
+.ws-fw-empty-message {
+  font-size: 15px;
+  color: #777;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.ws-message-form-wrapper {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* --- 모달 전용 덮어쓰기 스타일 (WsModal.css 안에 있을 때) --- */
+.ws-modal-body .ws-follow-wish-container {
+  min-width: 600px;
+}
+
+.ws-modal-body .ws-fw-header {
+  padding-top: 25px;
+  margin-bottom: 10px;
+  border-bottom: none;
+}
+
+.ws-modal-body .ws-fw-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ws-modal-body .ws-fw-divider {
+  display: block;
+  border: 0;
+  height: 1px;
+  background-color: #eee;
+  margin: 0 0 15px 0;
+}
+
+.ws-modal-body .ws-fw-list {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+}
+
+.ws-modal-body .ws-fw-list-item {
+  padding: 14px 18px;
+}
+
+.ws-modal-body .ws-fw-empty-message {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+  margin-top: 0;
+}

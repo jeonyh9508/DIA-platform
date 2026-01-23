@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    model header
+    <header>로그인 / 공지사항 / QNA</header>
+    <section>로고 검색창 위시 알림 마이</section>
+    <div>검색창 필터 검색 ( 지역 인원 카테고리 난이도 금액 )</div>
+
+    <div>태그 별 검색</div>
+    <div th:each="workshop : ${workshopList}">
+        <a th:href="@{/workshop-info(workshop_id=${workshop.workshop_id})}">공방 인기순 슬라이드( 태그 / 공방 이미지 / 공방 간략정보 )</a>
+    </div>
+    <div th:each="program : ${programList}">
+        <a th:href="@{/program-info(program_id=${program.program_id})}">프로그램 인기순 슬라이드( 태그 / 프로그램 이미지 / 프로그램 간략정보 )</a>
+    </div>
+    첫 페이지
+</body>
+</html>

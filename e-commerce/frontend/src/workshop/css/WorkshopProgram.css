@@ -1,0 +1,154 @@
+.wp-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.wp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+  color: #444;
+  flex-shrink: 0;
+}
+
+.wp-title {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1em;
+}
+
+.wp-add-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.wp-add-btn:hover {
+  background-color: #333;
+}
+
+.wp-list-wrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f0f0f0;
+}
+
+.wp-list-empty {
+  padding: 30px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.wp-list-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+.wp-list-item:last-child {
+  border-bottom: none;
+}
+.wp-item-info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 5px;
+}
+.wp-item-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #333;
+}
+.wp-item-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+.wp-item-thumb.default-img {
+  background-color: #f0f0f0;
+  border: 1px solid #eee;
+}
+.wp-item-text {
+  display: flex;
+  flex-direction: column;
+}
+.wp-item-text b {
+  font-size: 15px;
+}
+.wp-item-text p {
+  font-size: 13px;
+  color: #777;
+  margin: 3px 0 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wp-item-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.wp-item-profit-box .chart-open-button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 5px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+.wp-item-profit-box .chart-open-button:hover {
+  background-color: #f9f9f9;
+}
+
+.wp-item-profit-box b {
+  font-size: 15px;
+  color: #333;
+}
+.profit-display-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #444;
+}
+.wp-profit-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profit-display-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.wp-item-deactivate {
+  color: #d02929 !important;
+}
+
+.pg-approved-거절 {
+  color: #d02929 !important;
+}

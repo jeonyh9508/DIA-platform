@@ -1,0 +1,118 @@
+.main-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 20px 50px;
+}
+
+.page-header {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin: 25px 0px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.workshop-info {
+  display: flex;
+  justify-content: center;
+}
+
+.workshop-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+.workshop-card .workshop-name {
+  color: #333;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.workshop-card .card-stats {
+  margin-left: auto;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.profile-info {
+  display: flex;
+  gap: 80px;
+  width: 90%;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* 화면 크기 줄였을 때 */
+@media (max-width: 700px) {
+  .profile-info {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .profile-info .info-card {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .profile-info .value {
+    white-space: nowrap;
+    word-break: break-word;
+    overflow: visible;
+  }
+}
+
+.follow-btn {
+  width: 80px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.follow-btn:hover {
+  background: #ddd;
+}
+
+.follow-btn.following {
+  border: none;
+  color: #ffffff;
+  background-color: #111;
+}
+
+.workshop-desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+  font-size: 17px;
+}
+
+.program-list-title {
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: 600;
+}

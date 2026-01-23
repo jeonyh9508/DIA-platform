@@ -1,0 +1,216 @@
+.erp-approval-page {
+  max-width: 1500px;
+  margin: 50px auto;
+  padding: 0 20px;
+  font-family: "Pretendard", sans-serif;
+  color: #222;
+}
+
+.erp-page-title {
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #111;
+  border-bottom: 1px solid #eee;
+}
+
+.approval-filter-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.approval-log-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.approval-log-filter-set {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.approval-log-filter-set label {
+  display: flex;
+  gap: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.approval-log-filter-set input[type="checkbox"] {
+  accent-color: #222;
+  cursor: pointer;
+}
+
+.filter-input,
+.filter-select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.search-btn {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #ddd;
+}
+
+.sort-btn {
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  font-size: 15px;
+  color: #666;
+  margin-left: 4px;
+  cursor: pointer;
+
+  /* 크기 고정 */
+  width: 16px; /* 폭을 고정해서 좌우 흔들림 방지 */
+  height: 16px; /* 높이도 고정해주면 더 안정됨 */
+  line-height: 16px; /* 아이콘이 한 줄로 가운데 맞음 */
+}
+
+.sort-btn.sort {
+  color: #111;
+}
+
+.erp-table {
+  width: 100%;
+  border-top: 1px solid #ddd;
+}
+
+.erp-table-header,
+.erp-table-row {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.erp-table-header {
+  font-weight: 600;
+  background: #f8f8f8;
+}
+
+.erp-table-row:hover {
+  background-color: #fafafa;
+}
+
+/* workshop-table 열 비율 */
+.workshop-table .erp-table-header,
+.workshop-table .erp-table-row {
+  grid-template-columns: 1.5fr 1fr 1.5fr 1fr 1fr 1fr;
+}
+
+/* program-table 열 비율 */
+.program-table .erp-table-header,
+.program-table .erp-table-row {
+  grid-template-columns: 1.3fr 2fr 1.2fr 1fr 1fr 1fr;
+}
+
+/* approval-log-table 열 비율 */
+.approval-log-table .erp-table-header,
+.approval-log-table .erp-table-row {
+  grid-template-columns: 0.7fr 1fr 0.8fr 0.7fr 0.5fr 1.2fr 1.5fr;
+}
+
+.long-text {
+  white-space: nowrap; /* 줄바꿈 X */
+  overflow: hidden; /* 넘치는 글자 숨김 */
+  text-overflow: ellipsis; /* ... 표시 */
+  display: inline-block; /* ellipsis가 적용되려면 필요 */
+}
+
+/* row가 열렸을 때 모든 long-text 확장 */
+.long-text.expanded {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  display: block; /* 줄바꿈 허용 */
+}
+
+.program-title-span {
+  width: 380px;
+}
+
+.target-name-span {
+  width: 220px;
+  cursor: pointer;
+}
+
+.reason-span {
+  width: 340px;
+  cursor: pointer;
+}
+
+.status-badge,
+.target-badge {
+  display: inline-block;
+  text-align: center;
+  width: fit-content;
+  min-width: 60px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 auto;
+}
+
+.status-승인 {
+  background-color: #5cb85c;
+}
+
+.status-대기 {
+  background-color: #f0ad4e;
+}
+
+.status-거절 {
+  background-color: #d9534f;
+}
+
+.target-PROGRAM {
+  background-color: #555555;
+  color: #fff;
+}
+
+.target-WORKSHOP {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+.manage-btn {
+  width: fit-content;
+  background-color: #4a4a4a;
+  border: none;
+  padding: 6px 16px;
+  color: #ffffff;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.manage-btn:hover {
+  background-color: #333;
+}
+
+.empty-list {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  color: #888;
+  padding: 100px;
+  text-align: center;
+  font-size: 15px;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <div>프로그램 명 : <span th:text="${vo.title}" /></div>
+        <div>설명 : <span th:text="${vo.description}" /></div>
+        <div>카테고리 : <span th:text="${vo.category}" /></div>
+        <div>금액 : <span th:text="${vo.price}" /></div>
+        <div>정원 : <span th:text="${vo.capacity}" /></div>
+        <div>소요시간 : <span th:text="${vo.duration_min}" />분</div>
+        <div>난이도: <span th:text="${vo.difficulty}" /></div>
+    </div>
+</body>
+</html>

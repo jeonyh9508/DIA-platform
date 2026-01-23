@@ -1,0 +1,116 @@
+.ws-pfv-container {
+  width: 100%;
+  margin: 2rem auto;
+
+  box-sizing: border-box;
+}
+
+.ws-pfv-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 1.1rem;
+  background-color: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.ws-pfv-error {
+  color: #d9534f;
+}
+
+.ws-pfv-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ws-pfv-table th,
+.ws-pfv-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.ws-pfv-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+}
+
+.ws-pfv-table td {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.ws-pfv-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ws-pfv-table tbody tr:hover {
+  background-color: #fdfdfd;
+}
+
+.ws-pfv-align-right {
+  text-align: right;
+  font-feature-settings: "tnum";
+}
+
+.ws-pfv-align-center {
+  text-align: center;
+}
+
+.ws-pfv-status-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.ws-pfv-status-text {
+  font-weight: 600;
+  color: #555;
+}
+
+.ws-pfv-status-text.ws-pfv-pending {
+  color: #d9534f;
+}
+
+.ws-pfv-btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  min-width: 80px;
+}
+
+.ws-pfv-btn:active {
+  transform: scale(0.97);
+}
+
+.ws-pfv-btn-action {
+  background-color: #333;
+  color: #ffffff;
+}
+
+.ws-pfv-btn-action:hover {
+  background-color: #555;
+}
+
+.ws-pfv-btn-view {
+  background-color: #555;
+  color: #ffffff;
+}
+
+.ws-pfv-btn-view:hover {
+  background-color: #333;
+}

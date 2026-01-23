@@ -1,0 +1,60 @@
+.ws-pi-slider-container {
+  position: relative;
+  width: 100%;
+
+  margin: 30px 0;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.ws-pi-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: black;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.ws-pi-btn:hover {
+  background: #999;
+}
+
+.ws-pi-btn-left {
+  left: 0;
+}
+
+.ws-pi-btn-right {
+  right: 0;
+}
+
+.ws-pi-scroll-wrapper {
+  display: flex;
+  overflow: hidden;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+.ws-pi-image-card {
+  height: 156px;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.ws-pi-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}

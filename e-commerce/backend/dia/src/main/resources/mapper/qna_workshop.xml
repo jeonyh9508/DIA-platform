@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.QnaWorkshopDAO">
+    <select id="selectAll" resultType="QnaWorkshopDTO" parameterType="int">
+        SELECT
+        q.qna_id,
+        q.user_id,
+        q.program_id,
+        q.title,
+        q.content,
+        q.answer,
+        q.created_at,
+        q.answered_at,
+
+        u.name AS userName,
+        u.profile_img AS userProfileImg,
+
+        p.workshop_id,
+        w.name AS workshopName
+        FROM qna_workshop AS q
+        LEFT JOIN user AS u ON q.user_id = u.user_id
+        JOIN program AS p on q.program_id = p.program_id
+        JOIN workshop AS w on p.workshop_id = w.workshop_id
+        WHERE q.program_id = #{programId}
+        ORDER BY q.created_at DESC
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="QnaWorkshopDTO">
+        SELECT
+        q.qna_id,
+        q.user_id,
+        q.program_id,
+        q.title,
+        q.content,
+        q.answer,
+        q.created_at,
+        q.answered_at,
+        u.name AS userName,
+        u.profile_img AS userProfileImg
+        FROM qna_workshop q
+        LEFT JOIN user u ON q.user_id = u.user_id
+        WHERE qna_id = #{qnaId}
+    </select>
+
+    <select id="selectAllCount" resultType="int" parameterType="int">
+        SELECT count(*) FROM qna_workshop WHERE program_id = #{programId}
+    </select>
+
+    <select id="selectMyQna" parameterType="int" resultType="QnaWorkshopDTO">
+        SELECT
+        qna_admin_id AS qnaAdminId,
+        NULL AS qnaId,
+        title,
+        content,
+        status,
+        answer,
+        created_at AS createdAt,
+        answered_at AS answeredAt,
+        '관리자' AS qnaType,
+        NULL AS programId,
+        NULL AS programTitle
+        FROM qna_admin
+        WHERE
+        user_id = #{userId}
+
+        UNION ALL
+
+        SELECT
+        NULL AS qnaAdminId,
+        q.qna_id AS qnaId,
+        q.title,
+        q.content,
+        q.status,
+        q.answer,
+        q.created_at AS createdAt,
+        q.answered_at AS answeredAt,
+        '공방' AS qnaType,
+        p.program_id AS programId,
+        p.title AS programTitle
+        FROM qna_workshop AS q
+        JOIN program AS p ON q.program_id = p.program_id
+        WHERE
+        q.user_id = #{userId}
+
+        ORDER BY
+        createdAt DESC
+    </select>
+
+    <select id="qnaWorkshop" parameterType="int" resultType="QnaWorkshopDTO">
+        SELECT
+        qw.qna_id, w.name AS workshopName, p.title AS programTitle, u.name, qw.title, qw.status, qw.content, qw.answer,
+        qw.created_at, qw.answered_at, p.program_id
+        FROM workshop w JOIN program p ON w.workshop_id = p.workshop_id JOIN qna_workshop qw ON p.program_id = qw.program_id
+        JOIN user u ON qw.user_id = u.user_id
+        WHERE w.workshop_id = #{workshopId}
+        ORDER BY created_at DESC
+    </select>
+
+    <update id="qnaWsAnswer" parameterType="QnaWorkshop">
+        UPDATE qna_workshop SET answer = #{answer}, answered_at = NOW(), status = '답변완료' WHERE qna_id = #{qnaId}
+    </update>
+
+    <insert id="insertQna" parameterType="QnaWorkshop" useGeneratedKeys="true" keyProperty="qnaId">
+        INSERT INTO qna_workshop(user_id, program_id, title, content)
+        VALUES(#{userId}, #{programId}, #{title}, #{content})
+    </insert>
+
+    <delete id="deleteQna" parameterType="int">
+        DELETE FROM qna_workshop WHERE qna_id = #{qnaId}
+    </delete>
+</mapper>

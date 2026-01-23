@@ -1,0 +1,192 @@
+.ws-workshop-form-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  display: flex; /* 좌우 분할 활성화 */
+  padding: 0;
+
+  /* 높이는 내부 콘텐츠(이미지, 폼)가 결정 */
+
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.ws-split-left {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 12px 0 0 12px;
+  overflow: hidden;
+}
+
+.ws-split-left .ws-logo-icon {
+  width: 70%;
+  height: auto;
+  opacity: 0.95;
+}
+
+.ws-split-right {
+  flex: 0 0 60%;
+  padding: 30px 40px;
+  background-color: #fcfcfc;
+  border-radius: 0 12px 12px 0;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.ws-split-right form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ws-form-title {
+  font-weight: 700;
+  color: #333;
+  text-align: left;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+}
+
+.ws-workshop-name {
+  font-size: 20px;
+  color: #555;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.ws-form-group {
+  margin-bottom: 22px;
+}
+
+.ws-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+.ws-workshop-form-container input[type="text"],
+.ws-workshop-form-container input[type="number"],
+.ws-workshop-form-container textarea,
+.ws-workshop-form-container select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ws-workshop-form-container textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.ws-workshop-form-container select {
+  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23555%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpolyline%20points%3D%276%209%2012%2015%2018%209%27%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 1em;
+  padding-right: 40px;
+}
+
+.ws-workshop-form-container input:focus,
+.ws-workshop-form-container textarea:focus,
+.ws-workshop-form-container select:focus {
+  border-color: #333;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(85, 85, 85, 0.1);
+}
+
+.ws-address-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ws-address-container .ws-form-label {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+.ws-address-container input {
+  flex-grow: 1;
+  max-width: 500px;
+  width: auto;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  color: #333;
+  font-weight: 500;
+}
+.ws-address-container .ws-search-button {
+  flex-shrink: 0;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #555;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ws-address-container .ws-search-button:hover {
+  background-color: #333;
+}
+
+.ws-address-display {
+  border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  margin-top: 5px;
+}
+.ws-address-display .ws-address-text {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0 0 0;
+}
+
+.ws-form-submit {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+.ws-form-submit button {
+  padding: 14px 25px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ws-btn-confirm {
+  background-color: #555;
+  color: white;
+}
+.ws-btn-confirm:hover {
+  background-color: #333;
+}
+.ws-deactivate-btn {
+  background-color: #dc3545;
+  color: white;
+}
+.ws-deactivate-btn:hover {
+  background-color: red;
+}

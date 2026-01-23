@@ -1,0 +1,305 @@
+/* 컨테이너 내용 없을 때 Footer 위치 올라오는 것 방지 */
+.my-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 전체 컨테이너 */
+.mypage-container {
+  flex: 1;
+  width: 900px;
+  margin: 0 auto;
+  padding: 100px 20px 50px;
+}
+
+/* 상단 경로 (Breadcrumb) */
+.breadcrumb {
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 1.8em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+/* 프로필 요약 섹션 */
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  max-width: 860px;
+  margin: 0 auto 40px auto;
+}
+
+.user-profile {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #f0f0f0;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.detail-name {
+  width: 80px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.detail-label {
+  width: 80px;
+  color: #888;
+  font-weight: 500;
+}
+
+.detail-value {
+  color: #333;
+  font-weight: 400;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-button {
+  background-color: #333;
+  color: white;
+}
+.edit-button:hover {
+  background-color: #555;
+}
+
+.delete-button {
+  background-color: #f0f0f0;
+  color: #666;
+}
+.delete-button:hover {
+  background-color: #e0e0e0;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 10px;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.menu-icon {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.menu-text {
+  font-weight: 500;
+}
+
+.menu-item-placeholder {
+  height: 120px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.MemberEditModal__Container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 10px 20px 10px;
+  font-family: 'Pretendard', sans-serif;
+  box-sizing: border-box;
+}
+
+.MemberEditModal__Title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.MemberEditModal__AvatarSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.MemberEditModal__ImageWrapper {
+  position: relative;
+}
+
+.MemberEditModal__ImageWrapper .preview-item {
+  width: 130px !important;
+  height: 130px !important;
+  border-radius: 10px;
+  overflow: visible !important;
+  margin: 0 auto;
+  position: relative;
+  background: #f8f9fa;
+}
+
+.MemberEditModal__ImageWrapper .preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ebedf0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.MemberEditModal__ImageWrapper .remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #222;
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s;
+}
+
+.MemberEditModal__ImageWrapper .remove-btn:hover {
+  background-color: #e03131;
+  transform: scale(1.1);
+}
+
+.MemberEditModal__ImageWrapper .add-btn {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: #f1f3f5;
+  border: 2px dashed #dee2e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: #adb5bd;
+  cursor: pointer;
+}
+
+.MemberEditModal__FormSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 16px;
+}
+
+.MemberEditModal__InputGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.MemberEditModal__Label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 6px;
+  margin-left: 4px;
+}
+
+.MemberEditModal__InputWrapper {
+  width: 100%;
+}
+
+.MemberEditModal__Input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.MemberEditModal__Input:focus {
+  background-color: #fff;
+  border-color: #333;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.MemberEditModal__ButtonSection {
+  margin-top: 24px;
+  grid-column: 1 / -1;
+}
+
+.MemberEditModal__SubmitButton {
+  width: 100%;
+  padding: 14px;
+  background-color: #212529;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.MemberEditModal__SubmitButton:hover {
+  background-color: #495057;
+}

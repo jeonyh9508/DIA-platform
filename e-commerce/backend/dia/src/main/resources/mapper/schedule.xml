@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.ScheduleDAO">
+    <select id="selectAll" resultType="ScheduleDTO" parameterType="int">
+        SELECT * FROM schedule
+        WHERE program_id = #{programId}
+        ORDER BY start_time
+    </select>
+
+    <select id="selectOne" resultType="ScheduleDTO" parameterType="int">
+        SELECT * FROM schedule
+        JOIN program USING(program_id)
+        JOIN workshop USING(workshop_id)
+        WHERE schedule_id = #{scheduleId}
+    </select>
+
+    <insert id="scheduleAdd" parameterType="ScheduleDTO">
+        INSERT INTO schedule (program_id, start_time, end_time, capacity)
+        VALUES (#{programId}, #{startTime}, #{endTime}, #{capacity})
+    </insert>
+
+    <update id="scheduleModi" parameterType="ScheduleDTO">
+        UPDATE schedule SET start_time=#{startTime}, end_time=#{endTime}, capacity=#{capacity}
+        WHERE schedule_id =#{scheduleId}
+    </update>
+
+    <update id="scheduleDel" parameterType="int">
+        UPDATE schedule SET active = false WHERE schedule_id =#{scheduleId}
+    </update>
+
+    <select id="selectAttendees" parameterType="int" resultType="int">
+        SELECT current_attendees FROM schedule
+        WHERE schedule_id = #{scheduleId}
+    </select>
+
+    <update id="addAttendees" parameterType="ScheduleDTO">
+        UPDATE schedule
+        SET current_attendees = current_attendees + #{numPeople}
+        WHERE schedule_id = #{scheduleId}
+    </update>
+
+    <update id="removeAttendees" parameterType="ScheduleDTO">
+        UPDATE schedule
+        SET current_attendees = GREATEST(current_attendees - #{numPeople}, 0)
+        WHERE schedule_id = #{scheduleId}
+    </update>
+
+    <update id="updateScheduleStatus">
+        UPDATE schedule
+        SET status = '마감'
+        WHERE start_time &lt;= NOW()
+        OR current_attendees >= capacity
+    </update>
+
+    <update id="updateScheduleOpen">
+        UPDATE schedule
+        SET status = '모집'
+        WHERE capacity > current_attendees
+        AND start_time > NOW()
+        AND status = '마감'
+    </update>
+
+    <select id="findFullSchedules" resultType="int">
+        SELECT schedule_id
+        FROM schedule
+        WHERE current_attendees >= capacity
+    </select>
+
+    <select id="findStartedSchedules" resultType="int">
+        SELECT schedule_id
+        FROM schedule
+        WHERE start_time &lt;= NOW()
+    </select>
+</mapper>

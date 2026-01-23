@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dia.dao.NotificationDAO">
+
+    <select id="wsNotice" parameterType="int" resultType="NotificationUserDTO">
+        SELECT n.notification_id, n.message, n.type, n.created_at, nu.viewed
+        FROM notification n
+        JOIN notification_user nu using (notification_id)
+        WHERE nu.workshop_id = #{workshopId}
+        ORDER BY created_at DESC
+    </select>
+
+    <update id="wsNoticeRead" parameterType="int">
+        UPDATE notification_user
+        SET viewed = 1
+        WHERE notification_id = #{notificationId}
+    </update>
+
+    <insert id="insertNoti" parameterType="NotificationDTO" useGeneratedKeys="true" keyProperty="notificationId">
+        INSERT INTO notification (
+        sender_id, target_type, workshop_id, message, type, created_at
+        ) VALUES (
+        #{senderId}, #{targetType}, #{workshopId}, #{message}, #{type}, NOW()
+        )
+    </insert>
+
+    <insert id="insertNotiUser" parameterType="NotificationDTO" >
+        INSERT INTO notification_user (notification_id, user_id)
+        VALUES
+        <foreach collection="idList" item="uid" separator=",">
+            (#{notificationId}, #{uid})
+        </foreach>
+    </insert>
+
+    <insert id="insertNotiWorkshop" parameterType="NotificationDTO" >
+        INSERT INTO notification_user (notification_id, user_id, workshop_id)
+        VALUES
+        (#{notificationId}, #{userId}, #{workshopId})
+    </insert>
+
+</mapper>

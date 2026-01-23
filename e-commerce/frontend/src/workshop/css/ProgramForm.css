@@ -1,0 +1,89 @@
+.ws-program-form-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+}
+
+.ws-form-group {
+  margin-bottom: 15px;
+}
+
+.ws-form-group > label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.ws-program-form-container input[type="text"],
+.ws-program-form-container input[type="number"],
+.ws-program-form-container input[type="date"],
+.ws-program-form-container textarea,
+.ws-program-form-container select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.ws-program-form-container select {
+  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23555%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpolyline%20points%3D%276%209%2012%2015%2018%209%27%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 1em;
+  padding-right: 40px;
+}
+
+.ws-program-form-container textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.ws-program-form-container input[type="text"]:focus,
+.ws-program-form-container input[type="number"]:focus,
+.ws-program-form-container input[type="date"]:focus,
+.ws-program-form-container textarea:focus,
+.ws-program-form-container select:focus {
+  border-color: #333;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ws-period-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.ws-period-inputs label {
+  font-weight: 500;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+}
+
+.ws-btn-deactivate {
+  background-color: #6c757d;
+  color: white;
+}
+.ws-btn-deactivate:hover {
+  background-color: #5a6268;
+}
+.ws-pg-modi-form .ws-form-title {
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
